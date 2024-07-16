@@ -1,7 +1,7 @@
 .sidebar {
   position: fixed;
-  top: 0;
   left: 0;
+  top: 0;
   height: 100%;
   width: 70px;
   box-sizing: border-box;
@@ -12,15 +12,24 @@
 
 .marginContainer {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   width: 100%;
   max-width: 100%;
-  padding: 0 8px;
+  padding: 0 10px;
   box-sizing: border-box;
+}
+
+.box1 {
+  display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .sidebar.open {
-  width: 250px; /* Expanded width */
+  box-shadow: 8px 0 8px -5px rgba(65, 65, 65, 0.5);
+  width: 250px;
 }
 
 .toggleButton {
@@ -29,10 +38,28 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 55px;
+  height: 54px;
   z-index: 1;
   padding: 4px 0;
   border-bottom: 1px solid #5e7f97;
+  gap: 8px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  margin-right: 40px;
+  gap: 1px;
+  font-weight: 600;
+}
+.first {
+  letter-spacing: 1px;
+  color: #fead16;
+}
+.second {
+  letter-spacing: 1px;
+  color: #fff;
 }
 
 .navLinks {
@@ -45,7 +72,7 @@
   justify-content: center;
   width: 100%;
   margin: 6px 0;
-  height: 52px;
+  height: 50px;
 }
 .linkTag {
   display: flex;
@@ -56,7 +83,6 @@
   color: #fff;
   border-radius: 10px;
   text-decoration: none;
-  transition: background-color 0.3s ease;
 }
 
 .linkTag.active {
@@ -79,4 +105,20 @@
   padding-left: 12px;
   font-size: 14px;
   letter-spacing: 1px;
+}
+
+.imageContainer {
+  display: flex;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin: 12px 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center;
 }

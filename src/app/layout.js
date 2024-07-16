@@ -1,3 +1,4 @@
+import Sidebar from "@/components/Sidebar";
 import "./globals.css";
 import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "react-hot-toast";
@@ -27,8 +28,8 @@ export default function RootLayout({ children }) {
         style={{ width: "100%", maxWidth: "100%" }}
       >
         <Toaster position="bottom-center" reverseOrder={false} />
-
-        {children}
+        <Sidebar />
+        <main style={{ marginLeft: "70px", height: "100%" }}>{children}</main>
       </body>
     </html>
   );
