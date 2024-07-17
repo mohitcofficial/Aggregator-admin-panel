@@ -38,91 +38,114 @@ const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const fontSize = { xs: 24, sm: 26, md: 28, lg: 30 };
+  const fontSize = { xs: 24, sm: 26, md: 26, lg: 28 };
   const fontSize2 = { xs: 28, sm: 30, md: 32, lg: 34 };
 
   return (
-    <nav className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
-      <div className={styles.marginContainer}>
-        <div className={styles.box1}>
-          <div className={styles.toggleButton} onClick={toggleSidebar}>
-            {isOpen ? (
-              <>
-                <div className={styles.logo}>
-                  <p className={styles.first}>Virtual</p>
-                  <p className={styles.second}>xcel</p>
-                </div>
-                <CloseIcon
-                  sx={{
-                    color: "#fff",
-                    fontSize: fontSize2,
-                  }}
+    <>
+      {isOpen && (
+        <div onClick={() => setIsOpen(false)} className={styles.fade}></div>
+      )}
+      <nav className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+        <div className={styles.marginContainer}>
+          <div className={styles.box1}>
+            <div className={styles.topHeader}>
+              {isOpen ? (
+                <>
+                  <div className={styles.logo}>
+                    <p className={styles.first}>Virtual</p>
+                    <p className={styles.second}>xcel</p>
+                  </div>
+                  <CloseIcon
+                    className={styles.toggleButton}
+                    onClick={toggleSidebar}
+                    sx={{
+                      color: "#fff",
+                      fontSize: fontSize2,
+                    }}
+                  />
+                </>
+              ) : (
+                <MenuIcon
+                  onClick={toggleSidebar}
+                  sx={{ color: "#fff", fontSize: fontSize2 }}
                 />
-              </>
-            ) : (
-              <MenuIcon sx={{ color: "#fff", fontSize: fontSize2 }} />
-            )}
+              )}
+            </div>
+            <ul className={styles.navLinks}>
+              <li className={styles.link}>
+                <Link
+                  className={`${styles.linkTag} ${
+                    activeNavItem === "dashboard" && styles.active
+                  }`}
+                  href="/"
+                  style={!isOpen ? { flexDirection: "column" } : {}}
+                >
+                  <DashboardIcon sx={{ fontSize: fontSize }} />
+                  <span className={isOpen ? styles.text : styles.text2}>
+                    Dashboard
+                  </span>
+                </Link>
+              </li>
+              <li className={styles.link}>
+                <Link
+                  className={`${styles.linkTag} ${
+                    activeNavItem === "cities" && styles.active
+                  }`}
+                  style={!isOpen ? { flexDirection: "column" } : {}}
+                  href="/cities"
+                >
+                  <LocationCityIcon sx={{ fontSize: fontSize }} />
+                  <span className={isOpen ? styles.text : styles.text2}>
+                    Cities
+                  </span>
+                </Link>
+              </li>
+              <li className={styles.link}>
+                <Link
+                  className={`${styles.linkTag} ${
+                    activeNavItem === "locations" && styles.active
+                  }`}
+                  style={!isOpen ? { flexDirection: "column" } : {}}
+                  href="/locations"
+                >
+                  <LocationOnIcon sx={{ fontSize: fontSize }} />
+                  <span className={isOpen ? styles.text : styles.text2}>
+                    Locations
+                  </span>
+                </Link>
+              </li>
+              <li className={styles.link}>
+                <Link
+                  className={`${styles.linkTag} ${
+                    activeNavItem === "queries" && styles.active
+                  }`}
+                  style={!isOpen ? { flexDirection: "column" } : {}}
+                  href="/queries"
+                >
+                  <HelpIcon sx={{ fontSize: fontSize }} />
+
+                  <span className={isOpen ? styles.text : styles.text2}>
+                    Queries
+                  </span>
+                </Link>
+              </li>
+            </ul>
           </div>
-          <ul className={styles.navLinks}>
-            <li className={styles.link}>
-              <Link
-                className={`${styles.linkTag} ${
-                  activeNavItem === "dashboard" && styles.active
-                }`}
-                href="/"
-              >
-                <DashboardIcon sx={{ fontSize: fontSize }} />
-                {isOpen && <span className={styles.text}>Dashboard</span>}
-              </Link>
-            </li>
-            <li className={styles.link}>
-              <Link
-                className={`${styles.linkTag} ${
-                  activeNavItem === "cities" && styles.active
-                }`}
-                href="/cities"
-              >
-                <LocationCityIcon sx={{ fontSize: fontSize }} />
-                {isOpen && <span className={styles.text}>Cities</span>}
-              </Link>
-            </li>
-            <li className={styles.link}>
-              <Link
-                className={`${styles.linkTag} ${
-                  activeNavItem === "locations" && styles.active
-                }`}
-                href="/locations"
-              >
-                <LocationOnIcon sx={{ fontSize: fontSize }} />
-                {isOpen && <span className={styles.text}>Locations</span>}
-              </Link>
-            </li>
-            <li className={styles.link}>
-              <Link
-                className={`${styles.linkTag} ${
-                  activeNavItem === "queries" && styles.active
-                }`}
-                href="/queries"
-              >
-                <HelpIcon sx={{ fontSize: fontSize }} />
-                {isOpen && <span className={styles.text}>Queries</span>}
-              </Link>
-            </li>
-          </ul>
+          <div className={styles.imageContainer}>
+            <Image
+              className={styles.image}
+              src={FaviconImage}
+              alt="Image"
+              fill={true}
+              placeholder="blur"
+              priority={true}
+              quality={true}
+            />
+          </div>
         </div>
-        <div className={styles.imageContainer}>
-          <Image
-            className={styles.image}
-            src={FaviconImage}
-            alt="Image"
-            fill={true}
-            placeholder="blur"
-            priority={true}
-            quality={true}
-          />
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 

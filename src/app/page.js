@@ -1,10 +1,12 @@
 import classes from "./page.module.css";
 
+export const metadata = {
+  title: "Dashboard | Virtualxcel",
+  keywords:
+    "Best Coworking Offices, Coworking Spaces, Virtual Offices, Cheap Coworking Spaces, Cheapest Coworking Space, Coworking Spaces near me",
+  description: "Virtualxcel Dashboard",
+};
+
 export default function Home() {
-  return (
-    <div className={classes.container}>
-      Dashboard page osidh foids fo ifhs fsdif oshfidshfoish fio
-      sfsodifhisdhfhsdfio shdfios dfo sfio shfohohfoisd fhi
-    </div>
-  );
+  return <div className={classes.container}></div>;
 }

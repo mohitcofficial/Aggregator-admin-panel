@@ -9,7 +9,6 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://virtualxcel.in"),
   title: {
     default: "Virtualxcel",
     template: "%s | Virtualxcel",

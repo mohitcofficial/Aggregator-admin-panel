@@ -10,14 +10,24 @@
   z-index: 1000;
 }
 
+.fade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
 .marginContainer {
   display: flex;
+  z-index: inherit;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   width: 100%;
   max-width: 100%;
-  padding: 0 10px;
+  padding: 0 8px;
   box-sizing: border-box;
 }
 
@@ -32,17 +42,20 @@
   width: 250px;
 }
 
-.toggleButton {
-  cursor: pointer;
+.topHeader {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 54px;
   z-index: 1;
+  height: 60px;
   padding: 4px 0;
   border-bottom: 1px solid #5e7f97;
   gap: 8px;
+  width: 100%;
+}
+
+.toggleButton {
+  cursor: pointer;
 }
 
 .logo {
@@ -72,7 +85,7 @@
   justify-content: center;
   width: 100%;
   margin: 6px 0;
-  height: 50px;
+  height: 60px;
 }
 .linkTag {
   display: flex;
@@ -105,6 +118,11 @@
   padding-left: 12px;
   font-size: 14px;
   letter-spacing: 1px;
+}
+
+.text2 {
+  margin: 2px 0;
+  font-size: 8px;
 }
 
 .imageContainer {
