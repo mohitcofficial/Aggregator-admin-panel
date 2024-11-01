@@ -1,0 +1,179 @@
+.modalInnerContainer {
+  display: flex;
+  background-color: var(--modal-background-color);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.label {
+  font-size: 13px;
+  color: var(--text-color-light);
+}
+
+.selectMenu {
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 6px 4px;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+.menuOption {
+  padding: 6px 10px;
+  color: rgb(78, 78, 78);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background-color: var(--white-color);
+  margin: 2px 0;
+  padding: 5px 8px;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  font-family: inherit;
+}
+
+.textArea {
+  resize: none;
+  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
+}
+
+.fileContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.errorText {
+  color: var(--red-color);
+  font-size: 12px;
+  margin: 12px 0;
+}
+
+.imagePreviewContainer {
+  position: relative;
+}
+
+.clearButton {
+  background-color: var(--red-color);
+  color: var(--white-color);
+  cursor: pointer;
+}
+.clearButton:hover {
+  background-color: var(--red-dull-color);
+}
+
+.previewImage {
+  object-fit: cover;
+}
+
+.fileInput {
+  width: 200px;
+  margin: 12px 0;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  font-family: inherit;
+  margin-top: 12px;
+}
+
+.cancelButton {
+  background-color: var(--red-color);
+  color: var(--white-color);
+  border: 1px solid var(--red-color);
+  padding: 8px 16px;
+  font-size: 13px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 200ms ease-in-out;
+}
+
+.cancelButton:hover {
+  color: var(--red-color);
+  background-color: transparent;
+}
+
+.updateButton {
+  background-color: var(--primary-color);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--white-color);
+  border: 1px solid var(--primary-color);
+  padding: 8px 16px;
+  border-radius: 12px;
+  transition: background-color 200ms ease-in-out;
+}
+
+.updateButton:hover {
+  color: var(--primary-color);
+  background-color: transparent;
+}
+
+@media (max-width: 1275px) and (min-width: 1001px) {
+}
+
+@media (max-width: 1000px) and (min-width: 801px) {
+  .form {
+    padding: 18px 0;
+    width: 90%;
+    min-width: 80%;
+  }
+  .modalInnerContainer {
+    width: 50%;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 801px) and (min-width: 601px) {
+  .form {
+    width: 95%;
+    padding: 20px 0;
+    min-width: 85%;
+  }
+}
+
+@media (max-width: 600px) {
+  .form {
+    width: 100%;
+    min-width: 100%;
+    padding: 18px 0;
+  }
+  .form {
+    box-sizing: border-box;
+    max-width: 90%;
+    width: 90%;
+  }
+  .modalInnerContainer {
+    width: 80%;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .modalInnerContainer {
+    width: 94%;
+    padding: 12px 0;
+  }
+}

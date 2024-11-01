@@ -1,0 +1,87 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 300px));
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image {
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.imageContainer:hover .image {
+  filter: brightness(0.7);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s ease;
+}
+
+.imageContainer:hover .overlay {
+  opacity: 1;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  border: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.deleteButton {
+  color: var(--white-color);
+  background-color: var(--red-color);
+}
+.deleteButton:hover,
+.updateButton:hover {
+  color: #000;
+  background-color: var(--white-color);
+}
+.updateButton {
+  color: var(--white-color);
+  background-color: var(--primary-color-light);
+}
+
+.fileInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.errorText {
+  color: var(--red-color);
+  font-size: 12px;
+  margin: 12px 0;
+}

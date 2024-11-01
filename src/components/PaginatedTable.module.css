@@ -1,0 +1,139 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  font-size: 13px;
+}
+
+.thead {
+  color: var(--primary-color);
+}
+
+.th {
+  font-size: 16px;
+  padding: 4px;
+  font-weight: 500;
+}
+
+.leftText,
+.left {
+  text-align: left;
+}
+.rightText,
+.right {
+  text-align: right;
+}
+
+.tbody {
+  margin: 6px 0;
+  width: 100%;
+}
+
+.linkTag {
+  width: 100%;
+}
+
+.tr2 {
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.tr2:hover {
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), 2px 2px 4px rgba(0, 0, 0, 0.1),
+    3px 3px 8px rgba(0, 0, 0, 0.1), 4px 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.td:first-child {
+  border-left-style: none;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.td:last-child {
+  border-right-style: none;
+  border-bottom-right-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.td {
+  background-color: #fff;
+  color: rgb(78, 78, 78);
+  padding: 8px 12px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.editButton {
+  color: rgb(114, 114, 114);
+}
+.editButton:hover {
+  color: rgb(49, 49, 49);
+}
+.deleteButton {
+  color: red;
+}
+.deleteButton:hover {
+  color: rgb(169, 4, 4);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pagination li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  cursor: pointer;
+  margin: 0 8px;
+  color: var(--primary-color);
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+.pagination li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  padding: 4px 16px;
+  text-align: center;
+  line-height: 2.1;
+}
+
+.pagination li:hover {
+  border: 1px solid var(--primary-color);
+}
+
+.pagination li.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}

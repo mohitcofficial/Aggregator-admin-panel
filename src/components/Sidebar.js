@@ -11,6 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import FlagIcon from "@mui/icons-material/Flag";
 import FaviconImage from "../../public/images/FaviconImage.png";
 
 const Sidebar = () => {
@@ -23,6 +24,8 @@ const Sidebar = () => {
     const lastElement = parts[parts.length - 1];
     if (!lastElement) {
       setActiveNavItem("dashboard");
+    } else if (lastElement === "states") {
+      setActiveNavItem("states");
     } else if (lastElement === "cities") {
       setActiveNavItem("cities");
     } else if (lastElement === "locations") {
@@ -37,15 +40,16 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   const fontSize = { xs: 24, sm: 26, md: 26, lg: 28 };
   const fontSize2 = { xs: 28, sm: 30, md: 32, lg: 34 };
 
   return (
     <>
-      {isOpen && (
-        <div onClick={() => setIsOpen(false)} className={styles.fade}></div>
-      )}
+      {isOpen && <div onClick={handleClose} className={styles.fade}></div>}
       <nav className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
         <div className={styles.marginContainer}>
           <div className={styles.box1}>
@@ -75,6 +79,7 @@ const Sidebar = () => {
             <ul className={styles.navLinks}>
               <li className={styles.link}>
                 <Link
+                  onClick={handleClose}
                   className={`${styles.linkTag} ${
                     activeNavItem === "dashboard" && styles.active
                   }`}
@@ -89,6 +94,22 @@ const Sidebar = () => {
               </li>
               <li className={styles.link}>
                 <Link
+                  onClick={handleClose}
+                  className={`${styles.linkTag} ${
+                    activeNavItem === "states" && styles.active
+                  }`}
+                  style={!isOpen ? { flexDirection: "column" } : {}}
+                  href="/states"
+                >
+                  <FlagIcon sx={{ fontSize: fontSize }} />
+                  <span className={isOpen ? styles.text : styles.text2}>
+                    States
+                  </span>
+                </Link>
+              </li>
+              <li className={styles.link}>
+                <Link
+                  onClick={handleClose}
                   className={`${styles.linkTag} ${
                     activeNavItem === "cities" && styles.active
                   }`}
@@ -103,6 +124,7 @@ const Sidebar = () => {
               </li>
               <li className={styles.link}>
                 <Link
+                  onClick={handleClose}
                   className={`${styles.linkTag} ${
                     activeNavItem === "locations" && styles.active
                   }`}
@@ -117,6 +139,7 @@ const Sidebar = () => {
               </li>
               <li className={styles.link}>
                 <Link
+                  onClick={handleClose}
                   className={`${styles.linkTag} ${
                     activeNavItem === "queries" && styles.active
                   }`}

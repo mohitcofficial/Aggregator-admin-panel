@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  width: 100%;
+  margin: 8px 0;
+}
+
+.heading {
+  color: rgb(76, 76, 76);
+  font-size: 20px;
+  font-weight: 500;
+}

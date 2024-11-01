@@ -1,8 +1,23 @@
+:root {
+  --primary-color: #164f63;
+  --primary-color-light: #1f6f8ccc;
+  --secondary-color: #1e90ff;
+  --accent-color: #ff6347;
+  --text-color: #333333;
+  --text-color-light: #4d4d4d;
+  --background-color: #f4f4f4;
+  --modal-background-color: #ededed;
+  --white-color: #fff;
+  --red-color: #f3493c;
+  --red-dull-color: #d53c31;
+}
+
 * {
   margin: 0;
   padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(233, 158, 19) transparent;
 }
-
 html {
   width: 100%;
   height: 100%;
@@ -16,11 +31,6 @@ body {
   scroll-behavior: smooth;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(233, 158, 19) transparent;
-}
-
 .gradientText {
   background: linear-gradient(
     90deg,
@@ -30,4 +40,8 @@ body {
   );
   -webkit-background-clip: text;
   color: transparent;
+}
+
+.linkTag {
+  text-decoration: none;
 }
