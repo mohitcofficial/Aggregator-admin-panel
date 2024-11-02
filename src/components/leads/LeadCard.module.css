@@ -1,0 +1,68 @@
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 16px;
+  margin: 12px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-color);
+  padding: 8px 0;
+}
+
+.label {
+  font-weight: 600;
+  color: #333;
+  min-height: 20px;
+  width: 150px;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.data {
+  font-size: 14px;
+  color: #555;
+  font-weight: 400;
+  overflow-wrap: break-word;
+  flex-grow: 1;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 12px;
+  gap: 16px;
+}
+
+.deleteButton,
+.updateButton {
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  padding: 8px 24px;
+  border-radius: 10px;
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+.deleteButton {
+  background-color: var(--red-color);
+}
+.deleteButton:hover {
+  background-color: var(--red-dull-color);
+}
+
+.updateButton {
+  background-color: var(--primary-color);
+}
+.updateButton:hover {
+  background-color: var(--primary-color-dark);
+}

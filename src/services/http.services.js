@@ -29,3 +29,9 @@ export const ADMIN_URLs = {
   logout: `${BASEURL}/api/v1/logout`,
   getMyProfile: `${BASEURL}/api/v1/me`,
 };
+export const LEAD_URLs = {
+  createLead: `${BASEURL}/api/v1/lead`,
+  getLeads: `${BASEURL}/api/v1/leads`,
+  updateLead: `${BASEURL}/api/v1/lead`,
+  deleteLead: `${BASEURL}/api/v1/lead`,
+};

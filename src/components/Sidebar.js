@@ -30,8 +30,8 @@ const Sidebar = () => {
       setActiveNavItem("cities");
     } else if (lastElement === "locations") {
       setActiveNavItem("locations");
-    } else if (lastElement === "queries") {
-      setActiveNavItem("queries");
+    } else if (lastElement === "leads") {
+      setActiveNavItem("leads");
     } else {
       setActiveNavItem("");
     }
@@ -141,15 +141,15 @@ const Sidebar = () => {
                 <Link
                   onClick={handleClose}
                   className={`${styles.linkTag} ${
-                    activeNavItem === "queries" && styles.active
+                    activeNavItem === "leads" && styles.active
                   }`}
                   style={!isOpen ? { flexDirection: "column" } : {}}
-                  href="/queries"
+                  href="/leads"
                 >
                   <HelpIcon sx={{ fontSize: fontSize }} />
 
                   <span className={isOpen ? styles.text : styles.text2}>
-                    Queries
+                    Leads
                   </span>
                 </Link>
               </li>
