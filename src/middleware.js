@@ -14,8 +14,6 @@ export async function middleware(request) {
       return NextResponse.redirect(new URL("/", request.url));
     }
 
-    console.log(currentPath);
-
     if (!data.success && currentPath !== "/login") {
       return NextResponse.redirect(new URL("/login", request.url));
     }

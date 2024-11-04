@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import StateAPIs from "../../services/api/State.api.services";
 import classes from "./StateForm.module.css";
+import toast from "react-hot-toast";
+import Loader from "@/utils/Loader";
 
 function StateForm() {
   const router = useRouter();
@@ -15,6 +17,7 @@ function StateForm() {
   const [stateBanner, setStateBanner] = useState(null);
   const [fileError, setFileError] = useState(null);
   const [flag, setFlag] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
 
   useEffect(() => {
@@ -39,13 +42,17 @@ function StateForm() {
     formData.append("metaTitle", metaTitle);
     formData.append("metaKeyword", metaKeyword);
     formData.append("file", stateBanner);
-
+    setLoading(true);
     try {
       const data = await StateAPIs.addNewState(formData);
       router.push("/states");
       console.log("apiData: ", data);
+      toast.success(data?.message);
     } catch (error) {
+      toast.success("Something Went Wrong !");
       console.error("Error submitting form:", error);
+    } finally {
+      setLoading(false);
     }
   };
   const handleFileChange = (e) => {
@@ -90,6 +97,7 @@ function StateForm() {
   };
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
+      {loading && <Loader />}
       <input
         type="text"
         className={classes.input}
