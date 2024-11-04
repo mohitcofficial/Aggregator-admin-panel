@@ -33,7 +33,7 @@ function Page() {
     <div className={classes.container}>
       {loading && <Loader />}
       <form className={classes.form} onSubmit={handleLogin}>
-        <p className={classes.formHeading}>Admin Login P</p>
+        <p className={classes.formHeading}>Admin Panel</p>
         <input
           className={classes.input}
           type="text"
