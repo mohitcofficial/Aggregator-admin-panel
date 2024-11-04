@@ -15,7 +15,7 @@ function Page() {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (email.length === 0 || password.length === 0) {
-      toast("Good Job!", {
+      toast("Fill both fields!", {
         icon: "⚠",
       });
       return;
@@ -28,9 +28,7 @@ function Page() {
     try {
       const data = await ADMIN_APIs.login(body);
       toast.success(data?.message);
-      setTimeout(() => {
-        router.push("/states");
-      }, 200);
+      router.replace("/");
     } catch (error) {
       toast.error(error?.response?.message || "Something Went Wrong !");
     } finally {
