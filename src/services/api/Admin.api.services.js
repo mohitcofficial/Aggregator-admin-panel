@@ -20,8 +20,11 @@ export default {
     });
     return data;
   },
-  getMyProfile: async function () {
+  getMyProfile: async function (token) {
     const { data } = await axios.get(`${ADMIN_URLs.getMyProfile}`, {
+      headers: {
+        Cookie: `authToken=${token}`,
+      },
       withCredentials: true,
     });
     return data;
