@@ -10,7 +10,7 @@ import LocationApiServices from "@/services/api/Location.api.services";
 import Link from "next/link";
 import CustomSkeleton from "@/components/CustomSkeleton";
 
-const page = () => {
+const Page = () => {
   const [selectedCities, setSelectedCities] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [locationData, setLocationData] = useState([]);
@@ -121,4 +121,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

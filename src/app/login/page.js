@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Loader from "@/utils/Loader";
 
-function page() {
+function Page() {
   const [email, setEmail] = useState("mohitchandraofficial@gmail.com");
   const [password, setPassword] = useState("mausi@1234567");
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,7 @@ function page() {
     <div className={classes.container}>
       {loading && <Loader />}
       <form className={classes.form} onSubmit={handleLogin}>
-        <p className={classes.formHeading}>Admin Login Page</p>
+        <p className={classes.formHeading}>Admin Login P</p>
         <input
           className={classes.input}
           type="text"
@@ -56,4 +56,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
