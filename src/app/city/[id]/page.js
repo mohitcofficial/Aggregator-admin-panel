@@ -80,12 +80,35 @@ export default async function CityPage({ params }) {
                 {cityInfo?.metaData?.metaKeyword}
               </p>
             </div>
+            <div className={classes.priceContainer}>
+              <h3>Starting Prices</h3>
+              <label className={classes.label} htmlFor="">
+                Business Registration (Annually)
+              </label>
+              <p className={classes.metaText}>
+                {cityInfo?.businessRegistrationPrice}
+              </p>
+              <label className={classes.label} htmlFor="">
+                GST Registration (Annually)
+              </label>
+              <p className={classes.metaText}>
+                {cityInfo?.gstRegistrationPrice}
+              </p>
+              <label className={classes.label} htmlFor="">
+                Mailing Address (Annually)
+              </label>
+              <p className={classes.metaText}>
+                {cityInfo?.mailingAddressPrice}
+              </p>
+            </div>
+            <br />
             <EditCityModal cityInfo={cityInfo} stateData={stateData}>
               <button className={classes.editButton}>
                 Edit City
                 <EditIcon sx={{ fontSize: "14px", margin: "0 2px" }} />
               </button>
             </EditCityModal>
+            <br />
           </div>
         )}
       </div>

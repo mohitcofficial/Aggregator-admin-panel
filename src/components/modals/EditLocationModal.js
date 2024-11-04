@@ -67,6 +67,14 @@ export default function EditLocationModal({
 
   useEffect(() => {
     if (
+      isNaN(mailingAddressPrice) ||
+      isNaN(businessRegistrationPrice) ||
+      isNaN(gstRegistrationPrice) ||
+      isNaN(xCoordinate) ||
+      isNaN(yCoordinate)
+    )
+      setFlag(true);
+    else if (
       name === locationInfo?.name &&
       metaDescription === locationInfo?.metaData?.metaDescription &&
       metaTitle === locationInfo?.metaData?.metaTitle &&
@@ -98,8 +106,6 @@ export default function EditLocationModal({
   const formSubmitHandler = async (e) => {
     e.preventDefault();
     if (flag) return;
-
-    console.log("type: ", typeof yCoordinate);
 
     const formData = new FormData();
     if (name != locationInfo.name) formData.append("name", name);
@@ -155,19 +161,7 @@ export default function EditLocationModal({
   };
 
   const handleClose = () => {
-    if (
-      name === locationInfo?.name &&
-      metaDescription === locationInfo?.metaData?.metaDescription &&
-      metaTitle === locationInfo?.metaData?.metaTitle &&
-      metaKeyword === locationInfo?.metaData?.metaKeyword &&
-      selectedCityId === locationInfo?.cityId?._id &&
-      businessRegistrationPrice === locationInfo?.businessRegistrationPrice &&
-      gstRegistrationPrice === locationInfo?.gstRegistrationPrice &&
-      mailingAddressPrice === locationInfo?.mailingAddressPrice &&
-      address === locationInfo?.address &&
-      xCoordinate === locationInfo?.locationCoordinates?.["coordinates"][0] &&
-      yCoordinate === locationInfo?.locationCoordinates?.["coordinates"][1]
-    ) {
+    if (flag) {
       setOpen(false);
       reset();
       return;
@@ -288,7 +282,7 @@ export default function EditLocationModal({
               onChange={(e) => {
                 setBusinessRegistrationPrice(parseFloat(e.target.value));
               }}
-              type="text"
+              type="number"
               placeholder="Enter the new Business Registration Price"
             />
             <label htmlFor="" className={classes.label}>
@@ -300,7 +294,7 @@ export default function EditLocationModal({
               onChange={(e) => {
                 setgstRegistrationPrice(parseFloat(e.target.value));
               }}
-              type="text"
+              type="number"
               placeholder="Enter the new GST Registration Price"
             />
             <label htmlFor="" className={classes.label}>
@@ -312,7 +306,7 @@ export default function EditLocationModal({
               onChange={(e) => {
                 setMailingAddressPrice(parseFloat(e.target.value));
               }}
-              type="text"
+              type="number"
               placeholder="Enter the new Mailing Address Price"
             />
             <br />

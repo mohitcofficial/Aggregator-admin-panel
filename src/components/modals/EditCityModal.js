@@ -40,6 +40,15 @@ export default function EditCityModal({
   const [metaKeyword, setMetaKeyword] = useState(
     cityInfo?.metaData?.metaKeyword
   );
+  const [businessRegistrationPrice, setBusinessRegistrationPrice] = useState(
+    cityInfo?.businessRegistrationPrice
+  );
+  const [gstRegistrationPrice, setgstRegistrationPrice] = useState(
+    cityInfo?.gstRegistrationPrice
+  );
+  const [mailingAddressPrice, setMailingAddressPrice] = useState(
+    cityInfo?.mailingAddressPrice
+  );
   const [cityBanner, setCityBanner] = useState(null);
   const [fileError, setFileError] = useState(null);
   const [flag, setFlag] = useState(true);
@@ -47,16 +56,26 @@ export default function EditCityModal({
   const [selectedStateId, setSelectedStateId] = useState(
     cityInfo?.stateId?._id || ""
   );
-
   const router = useRouter();
+
+  console.log(isNaN(mailingAddressPrice));
 
   useEffect(() => {
     if (
+      isNaN(mailingAddressPrice) ||
+      isNaN(businessRegistrationPrice) ||
+      isNaN(gstRegistrationPrice)
+    )
+      setFlag(true);
+    else if (
       name === cityInfo.name &&
       metaDescription === cityInfo.metaData?.metaDescription &&
       metaTitle === cityInfo.metaData?.metaTitle &&
       metaKeyword === cityInfo.metaData?.metaKeyword &&
       selectedStateId === cityInfo?.stateId?._id &&
+      businessRegistrationPrice === cityInfo?.businessRegistrationPrice &&
+      gstRegistrationPrice === cityInfo?.gstRegistrationPrice &&
+      mailingAddressPrice === cityInfo?.mailingAddressPrice &&
       !cityBanner
     )
       setFlag(true);
@@ -67,6 +86,9 @@ export default function EditCityModal({
     metaTitle,
     metaKeyword,
     cityBanner,
+    businessRegistrationPrice,
+    gstRegistrationPrice,
+    mailingAddressPrice,
     selectedStateId,
   ]);
 
@@ -82,6 +104,12 @@ export default function EditCityModal({
       formData.append("metaTitle", metaTitle);
     if (metaKeyword != cityInfo?.metaData?.metaKeyword)
       formData.append("metaKeyword", metaKeyword);
+    if (businessRegistrationPrice != cityInfo?.businessRegistrationPrice)
+      formData.append("businessRegistrationPrice", businessRegistrationPrice);
+    if (gstRegistrationPrice != cityInfo?.gstRegistrationPrice)
+      formData.append("gstRegistrationPrice", gstRegistrationPrice);
+    if (mailingAddressPrice != cityInfo?.mailingAddressPrice)
+      formData.append("mailingAddressPrice", mailingAddressPrice);
     if (selectedStateId !== "") formData.append("stateId", selectedStateId);
     if (cityBanner) formData.append("file", cityBanner);
 
@@ -131,18 +159,15 @@ export default function EditCityModal({
     setMetaDescription(cityInfo?.metaData?.metaDescription);
     setMetaKeyword(cityInfo?.metaData?.metaKeyword);
     setMetaTitle(cityInfo?.metaData?.metaTitle);
+    setBusinessRegistrationPrice(cityInfo?.businessRegistrationPrice);
+    setgstRegistrationPrice(cityInfo?.gstRegistrationPrice);
+    setMailingAddressPrice(cityInfo?.mailingAddressPrice);
     setCityBanner(null);
     setSelectedStateId(cityInfo?.stateId?._id || "");
   };
 
   const handleClose = () => {
-    if (
-      name === cityInfo.name &&
-      metaDescription === cityInfo.metaData?.metaDescription &&
-      metaTitle === cityInfo?.metaData?.metaTitle &&
-      metaKeyword === cityInfo?.metaData?.metaKeyword &&
-      !cityBanner
-    ) {
+    if (flag) {
       setOpen(false);
       reset();
       return;
@@ -251,6 +276,42 @@ export default function EditCityModal({
               className={`${classes.input} ${classes.textArea}`}
               type="text"
               placeholder="Enter the new Meta Description"
+            />
+            <label htmlFor="" className={classes.label}>
+              Business Registration &#8377; Price (Annually)
+            </label>
+            <input
+              className={classes.input}
+              value={businessRegistrationPrice}
+              onChange={(e) => {
+                setBusinessRegistrationPrice(parseFloat(e.target.value));
+              }}
+              type="number"
+              placeholder="Enter the new Business Registration Price"
+            />
+            <label htmlFor="" className={classes.label}>
+              GST Registration &#8377; Price (Annually)
+            </label>
+            <input
+              className={classes.input}
+              value={gstRegistrationPrice}
+              onChange={(e) => {
+                setgstRegistrationPrice(parseFloat(e.target.value));
+              }}
+              type="number"
+              placeholder="Enter the new GST Registration Price"
+            />
+            <label htmlFor="" className={classes.label}>
+              Mailing Address &#8377; Price (Annually)
+            </label>
+            <input
+              className={classes.input}
+              value={mailingAddressPrice}
+              onChange={(e) => {
+                setMailingAddressPrice(parseFloat(e.target.value));
+              }}
+              type="number"
+              placeholder="Enter the new Mailing Address Price"
             />
             <div className={classes.fileContainer}>
               {cityBanner && (

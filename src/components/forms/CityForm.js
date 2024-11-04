@@ -21,6 +21,10 @@ function CityForm() {
   const [imageUrl, setImageUrl] = useState(null);
   const [states, setStates] = useState([]);
   const [selectedStateId, setSelectedStateId] = useState("");
+  const [businessRegistrationPrice, setBusinessRegistrationPrice] =
+    useState("");
+  const [gstRegistrationPrice, setgstRegistrationPrice] = useState("");
+  const [mailingAddressPrice, setMailingAddressPrice] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -46,7 +50,10 @@ function CityForm() {
       metaTitle.length > 0 &&
       metaKeyword.length > 0 &&
       cityBanner &&
-      selectedStateId.length > 0
+      selectedStateId.length > 0 &&
+      businessRegistrationPrice.length > 0 &&
+      gstRegistrationPrice.length > 0 &&
+      mailingAddressPrice.length > 0
     )
       setFlag(true);
     else setFlag(false);
@@ -57,6 +64,9 @@ function CityForm() {
     metaKeyword,
     cityBanner,
     selectedStateId,
+    businessRegistrationPrice,
+    gstRegistrationPrice,
+    mailingAddressPrice,
   ]);
 
   const handleSubmit = async (e) => {
@@ -69,6 +79,9 @@ function CityForm() {
     formData.append("stateId", selectedStateId);
     formData.append("metaTitle", metaTitle);
     formData.append("metaKeyword", metaKeyword);
+    formData.append("businessRegistrationPrice", businessRegistrationPrice);
+    formData.append("gstRegistrationPrice", gstRegistrationPrice);
+    formData.append("mailingAddressPrice", mailingAddressPrice);
     formData.append("file", cityBanner);
 
     setLoading(true);
@@ -182,6 +195,33 @@ function CityForm() {
         }}
         value={metaDescription}
         placeholder="Enter the City meta description"
+      />
+      <input
+        type="text"
+        className={classes.input}
+        onChange={(e) => {
+          setBusinessRegistrationPrice(e.target.value);
+        }}
+        value={businessRegistrationPrice}
+        placeholder="Enter the starting Businsess Registration Price (INR) (Annual)"
+      />
+      <input
+        type="text"
+        className={classes.input}
+        onChange={(e) => {
+          setgstRegistrationPrice(e.target.value);
+        }}
+        value={gstRegistrationPrice}
+        placeholder="Enter the starting GST Registration Price (INR) (Annual)"
+      />
+      <input
+        type="text"
+        className={classes.input}
+        onChange={(e) => {
+          setMailingAddressPrice(e.target.value);
+        }}
+        value={mailingAddressPrice}
+        placeholder="Enter the starting Mailing Address Price (INR) (Annual)"
       />
       <div className={classes.fileContainer}>
         {cityBanner && (
