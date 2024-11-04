@@ -31,7 +31,7 @@ function Page() {
       router.replace("/");
     } catch (error) {
       console.log(error);
-      toast.error(error?.response?.message || "Something Went Wrong !");
+      toast.error(error?.response?.data?.message || "Something Went Wrong !");
     } finally {
       setLoading(false);
     }

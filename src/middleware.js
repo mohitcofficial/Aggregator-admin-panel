@@ -1,16 +1,16 @@
-import axios from "axios";
 import { NextResponse } from "next/server";
+import AdminApiServices from "./services/api/Admin.api.services";
 
 export async function middleware(request) {
   const token = request.cookies.get("authToken")?.value;
+  const currentPath = request.nextUrl.pathname;
   if (!token) return NextResponse.redirect(new URL("/login", request.url));
   try {
-    const { data } = await axios.get("http://localhost:4000/api/v1/me", {
-      headers: {
-        Cookie: `authToken=${token}`,
-      },
-      withCredentials: true,
-    });
+    const data = await AdminApiServices.getMyProfile(token);
+
+    if (success && currentPath === "/login") {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
 
     if (!data.success) {
       return NextResponse.redirect(new URL("/login", request.url));
