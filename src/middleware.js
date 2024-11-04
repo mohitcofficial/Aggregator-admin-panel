@@ -8,7 +8,7 @@ export async function middleware(request) {
   try {
     const data = await AdminApiServices.getMyProfile(token);
 
-    if (success && currentPath === "/login") {
+    if (data.success && currentPath === "/login") {
       return NextResponse.redirect(new URL("/", request.url));
     }
 
