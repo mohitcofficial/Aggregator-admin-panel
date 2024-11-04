@@ -14,6 +14,12 @@ function Page() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (email.length === 0 || password.length === 0) {
+      toast("Good Job!", {
+        icon: "⚠",
+      });
+      return;
+    }
     const body = {
       email,
       password,
@@ -21,10 +27,12 @@ function Page() {
     setLoading(true);
     try {
       const data = await ADMIN_APIs.login(body);
-      router.push("/");
       toast.success(data?.message);
+      setTimeout(() => {
+        router.push("/states");
+      }, 200);
     } catch (error) {
-      toast.error("Invalid Email or Password !");
+      toast.error(error?.response?.message || "Something Went Wrong !");
     } finally {
       setLoading(false);
     }
