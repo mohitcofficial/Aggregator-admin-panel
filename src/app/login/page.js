@@ -30,6 +30,7 @@ function Page() {
       toast.success(data?.message);
       router.replace("/");
     } catch (error) {
+      console.log(error);
       toast.error(error?.response?.message || "Something Went Wrong !");
     } finally {
       setLoading(false);
