@@ -1,0 +1,75 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 12px;
+  margin: 12px 0;
+}
+
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  padding: 6px 12px;
+  color: rgb(78, 78, 78);
+  font: inherit;
+  font-size: 13px;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  gap: 24px;
+}
+
+.selectMenu {
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 6px 10px 6px 10px;
+  box-sizing: border-box;
+}
+
+.menuOption {
+  padding: 6px 10px;
+  color: rgb(78, 78, 78);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  background-color: var(--red-color);
+  border: 1px solid var(--red-color);
+  color: var(--white-color);
+  cursor: pointer;
+  padding: 8px 24px;
+  font-size: 15px;
+  border-radius: 16px;
+  transition: all 200ms ease-in-out;
+}
+.cancelButton:hover {
+  background-color: transparent;
+  color: var(--red-color);
+}
+.createButton {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--white-color);
+  cursor: pointer;
+  padding: 8px 24px;
+  font-size: 15px;
+  border-radius: 16px;
+  transition: all 200ms ease-in-out;
+}
+
+.errorText {
+  color: var(--red-color);
+  font-size: 12px;
+  margin: 12px 0;
+}

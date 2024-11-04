@@ -1,5 +1,5 @@
 "use client";
-import LeadsApiServices from "@/services/api/Leads.api.services";
+import LeadsApiServices from "@/services/api/Lead.api.services";
 import Loader from "@/utils/Loader";
 import { Box } from "@mui/material";
 import Modal from "@mui/material/Modal";

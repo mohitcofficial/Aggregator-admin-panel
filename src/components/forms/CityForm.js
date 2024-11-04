@@ -59,8 +59,6 @@ function CityForm() {
     selectedStateId,
   ]);
 
-  console.log(name, metaDescription);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!flag) return;

@@ -1,11 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import classes from "./StateForm.module.css";
-import UploadIcon from "@mui/icons-material/Upload";
 import ClearIcon from "@mui/icons-material/Clear";
-import StateAPIs from "../../services/api/State.api.services";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import StateAPIs from "../../services/api/State.api.services";
+import classes from "./StateForm.module.css";
 
 function StateForm() {
   const router = useRouter();

@@ -9,7 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { getDate } from "@/utils/convertDate";
-import LeadsApiServices from "@/services/api/Leads.api.services";
+import LeadsApiServices from "@/services/api/Lead.api.services";
 import LeadCard from "./LeadCard";
 import CustomSkeleton from "../CustomSkeleton";
 import toast from "react-hot-toast";

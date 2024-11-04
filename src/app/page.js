@@ -1,9 +1,6 @@
 import HeadingContainer from "@/components/HeadingContainer";
 import classes from "./page.module.css";
 import CardsContainer from "@/components/dashboard/CardsContainer";
-import ColumnChart from "@/components/dashboard/ColumnChart";
-import ActivityLog from "@/components/dashboard/ActivityLog";
-import PieChart from "@/components/dashboard/PiChart";
 
 export const metadata = {
   title: "Dashboard | Virtualxcel",
@@ -23,17 +20,7 @@ export default function Home() {
       <div className={classes.marginContainer}>
         <HeadingContainer heading={"Dashboard"} />
         <div className={classes.contentContainer}>
-          <div className={classes.leftContainer}>
-            <CardsContainer />
-            <ColumnChart
-              actual={[10, 12, 8, 20, 11, 23, 7]}
-              categories={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
-            />
-          </div>
-          <div className={classes.middleContainer}>
-            <PieChart data={randomVisitData} />
-          </div>
-          <ActivityLog />
+          <CardsContainer />
         </div>
       </div>
     </div>

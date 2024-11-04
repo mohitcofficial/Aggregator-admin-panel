@@ -15,11 +15,15 @@ export default {
     return data;
   },
   logout: async function () {
-    const { data } = await axios.get(`${ADMIN_URLs.logout}`);
+    const { data } = await axios.get(`${ADMIN_URLs.logout}`, {
+      withCredentials: true,
+    });
     return data;
   },
   getMyProfile: async function () {
-    const { data } = await axios.get(`${ADMIN_URLs.getMyProfile}`);
+    const { data } = await axios.get(`${ADMIN_URLs.getMyProfile}`, {
+      withCredentials: true,
+    });
     return data;
   },
 };
