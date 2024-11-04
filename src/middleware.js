@@ -4,7 +4,9 @@ import AdminApiServices from "./services/api/Admin.api.services";
 export async function middleware(request) {
   const token = request.cookies.get("authToken")?.value;
   const currentPath = request.nextUrl.pathname;
-  if (!token) return NextResponse.redirect(new URL("/login", request.url));
+  if (!token && currentPath !== "/login")
+    return NextResponse.redirect(new URL("/login", request.url));
+
   try {
     const data = await AdminApiServices.getMyProfile(token);
 
@@ -12,14 +14,20 @@ export async function middleware(request) {
       return NextResponse.redirect(new URL("/", request.url));
     }
 
-    if (!data.success) {
+    console.log(currentPath);
+
+    if (!data.success && currentPath !== "/login") {
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
     return NextResponse.next();
   } catch (error) {
     console.error("Authentication failed:", error.message);
-    return NextResponse.redirect(new URL("/login", request.url));
+    if (currentPath !== "/login") {
+      return redirectTo("/login");
+    }
+
+    return NextResponse.next();
   }
 }
 
@@ -28,10 +36,10 @@ export const config = {
     "/",
     "/states",
     "/state/:path*",
-    "/settings",
     "/cities",
     "/city/:path*",
     "/locations",
     "/location/:path*",
+    "/login",
   ],
 };
