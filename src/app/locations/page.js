@@ -9,6 +9,7 @@ import MultipleSelectDropdown from "@/components/MultipleSelectDropdown";
 import LocationApiServices from "@/services/api/Location.api.services";
 import Link from "next/link";
 import CustomSkeleton from "@/components/CustomSkeleton";
+import CustomLayout from "@/components/CustomLayout";
 
 const Page = () => {
   const [selectedCities, setSelectedCities] = useState([]);
@@ -72,52 +73,54 @@ const Page = () => {
   };
 
   return (
-    <div className={classes.container}>
-      {loading ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "96%",
-            margin: "12px 0",
-          }}
-        >
-          <br />
-          <CustomSkeleton height={30} width="100px" />
-          <br />
-          <CustomSkeleton height={50} />
-          <br />
-          <CustomSkeleton height={30} />
-          <br />
-          <CustomSkeleton height={400} />
-        </div>
-      ) : (
-        <div className={classes.marginContainer}>
-          <HeadingContainer heading={"Locations"} />
-          <div className={classes.buttonContainer}>
-            <Link href={"/location/add"} className="linkTag">
-              <button className={classes.addLocationButton}>
-                <AddIcon sx={{ fontSize: fontSize }} />
-                <span>Add Location</span>
-              </button>
-            </Link>
-            <MultipleSelectDropdown
-              selectedItems={selectedCities}
-              setSelectedItems={setSelectedCities}
-              handleFilter={handleFilter}
-              handleResetInput={handleResetInput}
-              names={names}
+    <CustomLayout>
+      <div className={classes.container}>
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "96%",
+              margin: "12px 0",
+            }}
+          >
+            <br />
+            <CustomSkeleton height={30} width="100px" />
+            <br />
+            <CustomSkeleton height={50} />
+            <br />
+            <CustomSkeleton height={30} />
+            <br />
+            <CustomSkeleton height={400} />
+          </div>
+        ) : (
+          <div className={classes.marginContainer}>
+            <HeadingContainer heading={"Locations"} />
+            <div className={classes.buttonContainer}>
+              <Link href={"/location/add"} className="linkTag">
+                <button className={classes.addLocationButton}>
+                  <AddIcon sx={{ fontSize: fontSize }} />
+                  <span>Add Location</span>
+                </button>
+              </Link>
+              <MultipleSelectDropdown
+                selectedItems={selectedCities}
+                setSelectedItems={setSelectedCities}
+                handleFilter={handleFilter}
+                handleResetInput={handleResetInput}
+                names={names}
+              />
+            </div>
+            <PaginatedTable2
+              middleName={"City"}
+              refresh={refresh}
+              data={filteredData}
+              reloadFunction={reloadLocationData}
             />
           </div>
-          <PaginatedTable2
-            middleName={"City"}
-            refresh={refresh}
-            data={filteredData}
-            reloadFunction={reloadLocationData}
-          />
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </CustomLayout>
   );
 };
 

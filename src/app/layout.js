@@ -1,9 +1,7 @@
-import Sidebar from "@/components/Sidebar";
-import "./globals.css";
-import { Inter, Poppins } from "next/font/google";
-import { Toaster } from "react-hot-toast";
-import Header from "@/components/Header";
+import { Poppins } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "react-hot-toast";
+import "./globals.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,16 +28,7 @@ export default function RootLayout({ children }) {
       >
         <Toaster position="bottom-center" reverseOrder={false} />
         <NextTopLoader showSpinner={false} />
-        <Sidebar />
-        <Header />
-        <main
-          style={{
-            padding: "60px 0 0 70px",
-            zIndex: "0",
-          }}
-        >
-          {children}
-        </main>
+        {children}
       </body>
     </html>
   );

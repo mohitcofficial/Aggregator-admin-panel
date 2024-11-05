@@ -22,7 +22,7 @@ export async function middleware(request) {
   } catch (error) {
     console.error("Authentication failed:", error.message);
     if (currentPath !== "/login") {
-      return redirectTo("/login");
+      return NextResponse.redirect(new URL("/login", request.url));
     }
 
     return NextResponse.next();
