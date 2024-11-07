@@ -14,6 +14,7 @@ function StateForm() {
   const [metaDescription, setMetaDescription] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
   const [metaKeyword, setMetaKeyword] = useState("");
+  const [rating, setRating] = useState(0);
   const [stateBanner, setStateBanner] = useState(null);
   const [fileError, setFileError] = useState(null);
   const [flag, setFlag] = useState(false);
@@ -26,11 +27,12 @@ function StateForm() {
       metaDescription.length > 0 &&
       metaTitle.length > 0 &&
       metaKeyword.length > 0 &&
+      parseFloat(rating) <= 5 &&
       stateBanner
     )
       setFlag(true);
     else setFlag(false);
-  }, [name, metaDescription, metaTitle, metaKeyword, stateBanner]);
+  }, [name, metaDescription, metaTitle, metaKeyword, stateBanner, rating]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +44,7 @@ function StateForm() {
     formData.append("metaTitle", metaTitle);
     formData.append("metaKeyword", metaKeyword);
     formData.append("file", stateBanner);
+    formData.append("rating", rating);
     setLoading(true);
     try {
       const data = await StateAPIs.addNewState(formData);
@@ -106,6 +109,18 @@ function StateForm() {
         }}
         value={name}
         placeholder="Enter the State name"
+      />
+      <input
+        value={rating}
+        onChange={(e) => {
+          setRating(parseFloat(e.target.value));
+        }}
+        className={classes.input}
+        type="number"
+        step="0.1"
+        min="0"
+        max="5"
+        placeholder="Enter the rating"
       />
       <input
         type="text"

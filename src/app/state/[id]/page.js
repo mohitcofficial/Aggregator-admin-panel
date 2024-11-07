@@ -56,6 +56,12 @@ export default async function StatePage({ params }) {
                 at
                 <span>{getTime(stateInfo?.updatedAt)}</span>
               </p>
+              <div className={classes.ratingContainer}>
+                <label className={classes.label} htmlFor="">
+                  Rating
+                </label>
+                <p className={classes.metaText}>{stateInfo?.rating}</p>
+              </div>
               <div className={classes.metaDataContainer}>
                 <h3>Metadata</h3>
                 <label className={classes.label} htmlFor="">

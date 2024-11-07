@@ -12,6 +12,7 @@ import Loader from "@/utils/Loader";
 function LocationForm() {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [rating, setRating] = useState(0);
   const [metaDescription, setMetaDescription] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
   const [metaKeyword, setMetaKeyword] = useState("");
@@ -59,7 +60,8 @@ function LocationForm() {
       mailingAddressPrice.length > 0 &&
       address.length > 0 &&
       xCoordinate.length > 0 &&
-      yCoordinate.length > 0
+      yCoordinate.length > 0 &&
+      rating <= 5
     )
       setFlag(true);
     else setFlag(false);
@@ -76,6 +78,7 @@ function LocationForm() {
     address,
     xCoordinate,
     yCoordinate,
+    rating,
   ]);
 
   const handleSubmit = async (e) => {
@@ -94,6 +97,7 @@ function LocationForm() {
     formData.append("address", address);
     formData.append("xCoordinate", xCoordinate);
     formData.append("yCoordinate", yCoordinate);
+    formData.append("rating", rating);
 
     locationImages.forEach((file) => {
       formData.append("files", file);
@@ -182,6 +186,18 @@ function LocationForm() {
         }}
         value={name}
         placeholder="Enter the Location name"
+      />
+      <input
+        value={rating}
+        onChange={(e) => {
+          setRating(parseFloat(e.target.value));
+        }}
+        className={classes.input}
+        type="number"
+        step="0.1"
+        min="0"
+        max="5"
+        placeholder="Enter the rating"
       />
       <input
         type="text"

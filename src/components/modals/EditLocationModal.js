@@ -35,6 +35,7 @@ export default function EditLocationModal({
   const handleOpen = () => setOpen(true);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState(locationInfo?.name);
+  const [rating, setRating] = useState(locationInfo?.rating);
   const [metaDescription, setMetaDescription] = useState(
     locationInfo?.metaData?.metaDescription
   );
@@ -71,7 +72,9 @@ export default function EditLocationModal({
       isNaN(businessRegistrationPrice) ||
       isNaN(gstRegistrationPrice) ||
       isNaN(xCoordinate) ||
-      isNaN(yCoordinate)
+      isNaN(yCoordinate) ||
+      isNaN(rating) ||
+      rating > 5
     )
       setFlag(true);
     else if (
@@ -83,6 +86,7 @@ export default function EditLocationModal({
       businessRegistrationPrice === locationInfo?.businessRegistrationPrice &&
       gstRegistrationPrice === locationInfo?.gstRegistrationPrice &&
       mailingAddressPrice === locationInfo?.mailingAddressPrice &&
+      rating === locationInfo?.rating &&
       address === locationInfo?.address &&
       xCoordinate == locationInfo?.locationCoordinates?.["coordinates"][0] &&
       yCoordinate == locationInfo?.locationCoordinates?.["coordinates"][1]
@@ -101,6 +105,7 @@ export default function EditLocationModal({
     xCoordinate,
     yCoordinate,
     address,
+    rating,
   ]);
 
   const formSubmitHandler = async (e) => {
@@ -123,6 +128,7 @@ export default function EditLocationModal({
       formData.append("gstRegistrationPrice", gstRegistrationPrice);
     if (mailingAddressPrice != locationInfo?.mailingAddressPrice)
       formData.append("mailingAddressPrice", mailingAddressPrice);
+    if (rating != locationInfo?.rating) formData.append("rating", rating);
     if (address != locationInfo?.address) formData.append("address", address);
     if (xCoordinate != locationInfo?.locationCoordinates?.coordinates[0])
       formData.append("xCoordinate", xCoordinate);
@@ -154,6 +160,7 @@ export default function EditLocationModal({
     setBusinessRegistrationPrice(locationInfo?.businessRegistrationPrice);
     setgstRegistrationPrice(locationInfo?.gstRegistrationPrice);
     setMailingAddressPrice(locationInfo?.mailingAddressPrice);
+    setRating(locationInfo?.rating);
     setAddress(locationInfo?.address);
     setXCoordinate(locationInfo?.locationCoordinates?.["coordinates"][0]);
     setYCoordinate(locationInfo?.locationCoordinates?.["coordinates"][1]);
@@ -235,6 +242,22 @@ export default function EditLocationModal({
                 </option>
               ))}
             </select>
+            <br />
+            <label htmlFor="" className={classes.label}>
+              Rating
+            </label>
+            <input
+              value={rating}
+              onChange={(e) => {
+                setRating(parseFloat(e.target.value));
+              }}
+              className={classes.input}
+              type="number"
+              step="0.1"
+              min="0"
+              max="5"
+              placeholder="Enter the new rating"
+            />
             <br />
             <label htmlFor="" className={classes.label}>
               Meta Title

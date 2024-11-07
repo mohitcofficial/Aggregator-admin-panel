@@ -12,6 +12,7 @@ import Loader from "@/utils/Loader";
 function CityForm() {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [rating, setRating] = useState(0);
   const [metaDescription, setMetaDescription] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
   const [metaKeyword, setMetaKeyword] = useState("");
@@ -53,7 +54,8 @@ function CityForm() {
       selectedStateId.length > 0 &&
       businessRegistrationPrice.length > 0 &&
       gstRegistrationPrice.length > 0 &&
-      mailingAddressPrice.length > 0
+      mailingAddressPrice.length > 0 &&
+      rating <= 5
     )
       setFlag(true);
     else setFlag(false);
@@ -67,6 +69,7 @@ function CityForm() {
     businessRegistrationPrice,
     gstRegistrationPrice,
     mailingAddressPrice,
+    rating,
   ]);
 
   const handleSubmit = async (e) => {
@@ -82,6 +85,7 @@ function CityForm() {
     formData.append("businessRegistrationPrice", businessRegistrationPrice);
     formData.append("gstRegistrationPrice", gstRegistrationPrice);
     formData.append("mailingAddressPrice", mailingAddressPrice);
+    formData.append("rating", rating);
     formData.append("file", cityBanner);
 
     setLoading(true);
@@ -168,6 +172,18 @@ function CityForm() {
         }}
         value={name}
         placeholder="Enter the City name"
+      />
+      <input
+        value={rating}
+        onChange={(e) => {
+          setRating(parseFloat(e.target.value));
+        }}
+        className={classes.input}
+        type="number"
+        step="0.1"
+        min="0"
+        max="5"
+        placeholder="Enter the rating"
       />
       <input
         type="text"

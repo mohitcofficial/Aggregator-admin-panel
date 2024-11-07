@@ -33,6 +33,7 @@ export default function EditCityModal({
   const handleOpen = () => setOpen(true);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState(cityInfo?.name);
+  const [rating, setRating] = useState(cityInfo?.rating);
   const [metaDescription, setMetaDescription] = useState(
     cityInfo?.metaData?.metaDescription
   );
@@ -58,13 +59,13 @@ export default function EditCityModal({
   );
   const router = useRouter();
 
-  console.log(isNaN(mailingAddressPrice));
-
   useEffect(() => {
     if (
       isNaN(mailingAddressPrice) ||
       isNaN(businessRegistrationPrice) ||
-      isNaN(gstRegistrationPrice)
+      isNaN(gstRegistrationPrice) ||
+      isNaN(rating) ||
+      rating > 5
     )
       setFlag(true);
     else if (
@@ -76,6 +77,7 @@ export default function EditCityModal({
       businessRegistrationPrice === cityInfo?.businessRegistrationPrice &&
       gstRegistrationPrice === cityInfo?.gstRegistrationPrice &&
       mailingAddressPrice === cityInfo?.mailingAddressPrice &&
+      rating === cityInfo?.rating &&
       !cityBanner
     )
       setFlag(true);
@@ -90,6 +92,7 @@ export default function EditCityModal({
     gstRegistrationPrice,
     mailingAddressPrice,
     selectedStateId,
+    rating,
   ]);
 
   const formSubmitHandler = async (e) => {
@@ -110,13 +113,14 @@ export default function EditCityModal({
       formData.append("gstRegistrationPrice", gstRegistrationPrice);
     if (mailingAddressPrice != cityInfo?.mailingAddressPrice)
       formData.append("mailingAddressPrice", mailingAddressPrice);
+    if (rating != cityInfo?.rating) formData.append("rating", rating);
     if (selectedStateId !== "") formData.append("stateId", selectedStateId);
     if (cityBanner) formData.append("file", cityBanner);
 
     setLoading(true);
     try {
-      await CityApiServices.editCity(formData, cityInfo._id);
-      toast.success("City Updated Successfully !");
+      const data = await CityApiServices.editCity(formData, cityInfo._id);
+      toast.success(data?.message);
       router.refresh();
       setLoading(false);
       if (reloadFunction) reloadFunction();
@@ -162,6 +166,7 @@ export default function EditCityModal({
     setBusinessRegistrationPrice(cityInfo?.businessRegistrationPrice);
     setgstRegistrationPrice(cityInfo?.gstRegistrationPrice);
     setMailingAddressPrice(cityInfo?.mailingAddressPrice);
+    setRating(cityInfo?.rating);
     setCityBanner(null);
     setSelectedStateId(cityInfo?.stateId?._id || "");
   };
@@ -241,6 +246,21 @@ export default function EditCityModal({
                 </option>
               ))}
             </select>
+            <label htmlFor="" className={classes.label}>
+              Rating
+            </label>
+            <input
+              value={rating}
+              onChange={(e) => {
+                setRating(parseFloat(e.target.value));
+              }}
+              className={classes.input}
+              type="number"
+              step="0.1"
+              min="0"
+              max="5"
+              placeholder="Enter the new rating"
+            />
             <label htmlFor="" className={classes.label}>
               Meta Title
             </label>

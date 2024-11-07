@@ -28,6 +28,7 @@ export default function EditStateModal({ children, stateInfo }) {
   const handleOpen = () => setOpen(true);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState(stateInfo?.name);
+  const [rating, setRating] = useState(stateInfo?.rating);
   const [metaDescription, setMetaDescription] = useState(
     stateInfo?.metaData?.metaDescription
   );
@@ -43,20 +44,21 @@ export default function EditStateModal({ children, stateInfo }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (
+    if (isNaN(rating) || parseFloat(rating) > 5) setFlag(true);
+    else if (
       name === stateInfo.name &&
       metaDescription === stateInfo.metaData?.metaDescription &&
       metaTitle === stateInfo.metaData?.metaTitle &&
       metaKeyword === stateInfo.metaData?.metaKeyword &&
+      rating === stateInfo?.rating &&
       !stateBanner
     )
       setFlag(true);
     else setFlag(false);
-  }, [name, metaDescription, metaTitle, metaKeyword, stateBanner]);
+  }, [name, metaDescription, metaTitle, metaKeyword, stateBanner, rating]);
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log("here flag: ", flag);
     if (flag) return;
 
     const formData = new FormData();
@@ -67,13 +69,13 @@ export default function EditStateModal({ children, stateInfo }) {
       formData.append("metaTitle", metaTitle);
     if (metaKeyword != stateInfo?.metaData?.metaKeyword)
       formData.append("metaKeyword", metaKeyword);
+    if (rating != stateInfo?.rating) formData.append("rating", rating);
     if (stateBanner) formData.append("file", stateBanner);
 
     setLoading(true);
     try {
       const data = await StateApiServices.editState(formData, stateInfo._id);
-      console.log("apiData: ", data);
-      toast.success("State Updated Successfully !");
+      toast.success(data?.message);
       router.refresh();
       setLoading(false);
       setOpen(false);
@@ -111,17 +113,12 @@ export default function EditStateModal({ children, stateInfo }) {
     setMetaDescription(stateInfo?.metaData?.metaDescription);
     setMetaKeyword(stateInfo?.metaData?.metaKeyword);
     setMetaTitle(stateInfo?.metaData?.metaTitle);
+    setRating(stateInfo?.rating);
     setStateBanner(null);
   };
 
   const handleClose = () => {
-    if (
-      name === stateInfo.name &&
-      metaDescription === stateInfo.metaData?.metaDescription &&
-      metaTitle === stateInfo?.metaData?.metaTitle &&
-      metaKeyword === stateInfo?.metaData?.metaKeyword &&
-      !stateBanner
-    ) {
+    if (flag) {
       setOpen(false);
       reset();
       return;
@@ -171,6 +168,21 @@ export default function EditStateModal({ children, stateInfo }) {
               className={classes.input}
               type="text"
               placeholder="Enter the new State name"
+            />
+            <label htmlFor="" className={classes.label}>
+              Rating
+            </label>
+            <input
+              value={rating}
+              onChange={(e) => {
+                setRating(parseFloat(e.target.value));
+              }}
+              className={classes.input}
+              type="number"
+              step="0.1"
+              min="0"
+              max="5"
+              placeholder="Enter the new rating"
             />
             <label htmlFor="" className={classes.label}>
               Meta Title

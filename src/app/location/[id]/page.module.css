@@ -49,6 +49,13 @@
   font-size: 13px;
 }
 
+.ratingContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 12px;
+}
+
 .metaDataContainer,
 .priceContainer {
   display: flex;
