@@ -98,7 +98,7 @@ function CardsContainer() {
     <div className={classes.container}>
       {cardData.map((card, index) =>
         loading ? (
-          <CustomSkeleton width="250px" height={60} />
+          <CustomSkeleton key={index} width="250px" height={60} />
         ) : (
           <Card
             key={index}
