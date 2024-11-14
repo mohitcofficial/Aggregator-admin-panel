@@ -8,6 +8,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import Loader from "@/utils/Loader";
 import { useRouter } from "next/navigation";
+import AddLocationImageModal from "../modals/AddLocationImageModal";
+import AddIcon from "@mui/icons-material/Add";
 
 function ImagesContainer({ locationInfo }) {
   const [fileError, setFileError] = useState(null);
@@ -70,35 +72,45 @@ function ImagesContainer({ locationInfo }) {
     }
   };
   return (
-    <div className={classes.gridContainer}>
-      {loading && <Loader />}
-      {locationInfo?.images?.map((img, index) => (
-        <div key={index} className={classes.imageContainer}>
-          <Image
-            src={img?.url}
-            alt="Selected city banner"
-            className={classes.image}
-            fill
-          />
-          <div className={classes.overlay}>
-            <label className={`${classes.button} ${classes.updateButton}`}>
-              <PhotoIcon />
-              <input
-                type="file"
-                className={classes.fileInput}
-                onChange={(e) => handleUpdateImage(e, img._id)}
-                accept="image/*"
-              />
-            </label>
-            <button
-              onClick={() => handleDelete(img._id)}
-              className={`${classes.button} ${classes.deleteButton}`}
-            >
-              <DeleteIcon />
-            </button>
+    <div className={classes.container}>
+      <div className={classes.gridContainer}>
+        {loading && <Loader />}
+        {locationInfo?.images?.map((img, index) => (
+          <div key={index} className={classes.imageContainer}>
+            <Image
+              src={img?.url}
+              alt="Selected city banner"
+              className={classes.image}
+              fill
+            />
+            <div className={classes.overlay}>
+              <label className={`${classes.button} ${classes.updateButton}`}>
+                <PhotoIcon />
+                <input
+                  type="file"
+                  className={classes.fileInput}
+                  onChange={(e) => handleUpdateImage(e, img._id)}
+                  accept="image/*"
+                />
+              </label>
+              <button
+                onClick={() => handleDelete(img._id)}
+                className={`${classes.button} ${classes.deleteButton}`}
+              >
+                <DeleteIcon />
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      {locationInfo.images.length < 6 && (
+        <AddLocationImageModal locationInfo={locationInfo}>
+          <button className={classes.addImageButton}>
+            <AddIcon sx={{ fontSize: { lg: 20, md: 18, sm: 16, xs: 16 } }} />
+            Add Image
+          </button>
+        </AddLocationImageModal>
+      )}
       {fileError && <p className={classes.errorText}>{fileError}</p>}
     </div>
   );

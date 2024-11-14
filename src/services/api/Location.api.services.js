@@ -51,6 +51,19 @@ export default {
     });
     return data;
   },
+  addMoreLocationImage: async function (body, id) {
+    const { data } = await axios.post(
+      `${LOCATION_URLs.addMoreLocationImage}/${id}`,
+      body,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      }
+    );
+    return data;
+  },
   updateLocationImage: async function (body, id) {
     const { data } = await axios.put(
       `${LOCATION_URLs.updateLocationImage}/${id}`,

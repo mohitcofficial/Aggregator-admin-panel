@@ -22,6 +22,7 @@ export const LOCATION_URLs = {
   deleteLocation: `${BASEURL}/api/v1/location`,
   deleteLocationImage: `${BASEURL}/api/v1/location/image`,
   updateLocationImage: `${BASEURL}/api/v1/location/image`,
+  addMoreLocationImage: `${BASEURL}/api/v1/location/image`,
 };
 export const ADMIN_URLs = {
   createAdmin: `${BASEURL}/api/v1/admin/create`,

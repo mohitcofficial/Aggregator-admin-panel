@@ -1,3 +1,8 @@
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 300px));
@@ -78,6 +83,29 @@
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+.addImageButton {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  outline: none;
+  font-size: 13px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 12px 0;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: all 200ms ease-in-out;
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+}
+
+.addImageButton:hover {
+  color: var(--primary-color);
+  background-color: transparent;
 }
 
 .errorText {
