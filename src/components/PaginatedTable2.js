@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 import EditLocationModal from "./modals/EditLocationModal";
 import LocationApiServices from "@/services/api/Location.api.services";
 
-const itemsPerPage = 10;
+const itemsPerPage = 20;
 
 const PaginatedTable2 = ({
   data,

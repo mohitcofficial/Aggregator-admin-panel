@@ -269,7 +269,7 @@ function LocationForm() {
           setYCoordinate(e.target.value);
         }}
         value={yCoordinate}
-        placeholder="Enter the X Coordinate of Map"
+        placeholder="Enter the Y Coordinate of Map"
       />
       <textarea
         type="text"

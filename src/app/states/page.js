@@ -8,6 +8,13 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import CustomLayout from "@/components/CustomLayout";
 
+export const metadata = {
+  title: "States",
+  keywords:
+    "Best Coworking Offices, Coworking Spaces, Virtual Offices, Cheap Coworking Spaces, Cheapest Coworking Space, Coworking Spaces near me",
+  description: "Virtualxcel States page",
+};
+
 export default async function page() {
   const reqHeaders = headers();
   const token = reqHeaders.get("cookie")?.split("authToken=")[1];
@@ -47,7 +54,7 @@ export default async function page() {
                 </button>
               </Link>
             </div>
-            <PaginatedTable data={response?.states} itemsPerPage={20} />
+            <PaginatedTable data={response?.states} itemsPerPage={30} />
           </div>
         </div>
       </CustomLayout>

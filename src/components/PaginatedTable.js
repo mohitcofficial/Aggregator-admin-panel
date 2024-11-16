@@ -13,7 +13,7 @@ import StateAPIs from "../services/api/State.api.services";
 import EditStateModal from "./modals/EditStateModal";
 import toast from "react-hot-toast";
 
-const PaginatedTable = ({ data, itemsPerPage = 10 }) => {
+const PaginatedTable = ({ data, itemsPerPage = 20 }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const router = useRouter();
 
