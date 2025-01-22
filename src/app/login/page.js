@@ -6,6 +6,13 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Loader from "@/utils/Loader";
 
+export const metadata = {
+  title: "Login",
+  keywords:
+    "Best Coworking Offices, Coworking Spaces, Virtual Offices, Cheap Coworking Spaces, Cheapest Coworking Space, Coworking Spaces near me",
+  description: "Virtualxcel Login page",
+};
+
 function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
