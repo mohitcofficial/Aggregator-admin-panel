@@ -39,5 +39,6 @@ export const config = {
     "/locations",
     "/location/:path*",
     "/login",
+    "/leads",
   ],
 };
