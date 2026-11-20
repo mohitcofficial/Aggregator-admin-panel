@@ -20,11 +20,14 @@ export default {
     });
     return data;
   },
+  getSalesEmployees: async function () {
+    const { data } = await axios.get(`${ADMIN_URLs.getSalesEmployees}`, {
+      withCredentials: true,
+    });
+    return data;
+  },
   getMyProfile: async function (token) {
     const { data } = await axios.get(`${ADMIN_URLs.getMyProfile}`, {
-      headers: {
-        Cookie: `authToken=${token}`,
-      },
       withCredentials: true,
     });
     return data;

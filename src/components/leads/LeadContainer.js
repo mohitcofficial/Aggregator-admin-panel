@@ -1,45 +1,49 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import classes from "./LeadContainer.module.css";
 import Link from "next/link";
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { getDate } from "@/utils/convertDate";
 import LeadsApiServices from "@/services/api/Lead.api.services";
-import LeadCard from "./LeadCard";
+import AdminApiServices from "@/services/api/Admin.api.services";
 import CustomSkeleton from "../CustomSkeleton";
 import toast from "react-hot-toast";
 import Loader from "@/utils/Loader";
+import PaginatedTable from "../table/PaginatedTable";
 
 function LeadContainer() {
   const fontSize = { xs: 18, sm: 18, md: 20, lg: 20 };
+
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
       key: "selection",
-      color: "#164f63",
     },
   ]);
+
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [leadData, setLeadData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loading2, setLoading2] = useState(false);
+  const [employees, setEmployees] = useState([]);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(25);
+  const [totalLeads, setTotalLeads] = useState(0);
+  const [statusFilter, setStatusFilter] = useState("");
+  const [assignedToFilter, setAssignedToFilter] = useState("");
 
   const handleDelete = async (id) => {
-    const confirmCancel = window.confirm(
-      "Are you sure you want to delete the Lead?"
-    );
-    if (confirmCancel) {
+    if (window.confirm("Are you sure you want to delete the Lead?")) {
       setLoading2(true);
       try {
         const data = await LeadsApiServices.deleteLead(id);
-        fetchLeadsData();
         toast.success(data?.message);
+        fetchLeadsData();
       } catch (error) {
         console.log(error);
       } finally {
@@ -47,19 +51,40 @@ function LeadContainer() {
       }
     }
   };
+
   const fetchLeadsData = async () => {
     setLoading(true);
     try {
-      const adjustedStartDate = new Date(dateRange[0].startDate);
-      const adjustedEndDate = new Date(dateRange[0].endDate);
+      const formattedStartDate = new Date(
+        dateRange[0].startDate,
+      ).toLocaleDateString("en-CA");
 
-      const formattedStartDate = adjustedStartDate.toLocaleDateString("en-CA"); // "en-CA" gives you YYYY-MM-DD format
-      const formattedEndDate = adjustedEndDate.toLocaleDateString("en-CA");
+      const formattedEndDate = new Date(
+        dateRange[0].endDate,
+      ).toLocaleDateString("en-CA");
+
       const data = await LeadsApiServices.getLeads({
         startDate: formattedStartDate,
         endDate: formattedEndDate,
+        status: statusFilter,
+        assignedTo: assignedToFilter,
+        page,
+        limit,
       });
+
       setLeadData(data?.leads || []);
+      setTotalLeads(data?.total || 0);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const fetchSalesEmployee = async () => {
+    setLoading(true);
+    try {
+      const data = await AdminApiServices.getSalesEmployees();
+      setEmployees(data?.users || []);
     } catch (error) {
       console.log(error);
     } finally {
@@ -69,117 +94,151 @@ function LeadContainer() {
 
   useEffect(() => {
     fetchLeadsData();
+  }, [page, limit, statusFilter, assignedToFilter]);
+
+  useEffect(() => {
+    fetchSalesEmployee();
   }, []);
 
-  const handleSelect = (ranges) => {
-    setDateRange([ranges.selection]);
-  };
-  const toggleDatePicker = () => {
-    setShowDatePicker(!showDatePicker);
-  };
-
-  const handleApply = () => {
-    setShowDatePicker(false);
-    fetchLeadsData();
-  };
   return (
     <div className={classes.container}>
       {loading2 && <Loader />}
+
       <div className={classes.buttonContainer}>
-        <Link className="linkTag" href={"/lead/add"}>
+        <Link className="linkTag" href="/lead/add">
           <button className={classes.addLeadButton}>
-            <AddIcon sx={{ fontSize: fontSize }} />
+            <AddIcon sx={{ fontSize }} />
             <span>Add Lead</span>
           </button>
         </Link>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            position: "relative",
-            gap: "32px",
-          }}
-        >
+
+        <div className={classes.filtersContainer}>
           <p className={classes.dateRangeText}>
-            From
-            <span>{getDate(dateRange[0]?.startDate)}</span>
-            to <span>{getDate(dateRange[0].endDate)}</span>
+            From <span>{getDate(dateRange[0].startDate)}</span> to{" "}
+            <span>{getDate(dateRange[0].endDate)}</span>
           </p>
-          <button
-            className={classes.selectRangeButton}
-            onClick={toggleDatePicker}
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              position: "relative",
+              gap: "6px",
+            }}
           >
-            Select Range
-            <CalendarMonthIcon sx={{ fontSize: fontSize }} />
-          </button>
-          {showDatePicker && (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                position: "absolute",
-                zIndex: 1000,
-                right: "0",
-                top: "100%",
+            <button
+              className={classes.selectRangeButton}
+              onClick={() => setShowDatePicker(!showDatePicker)}
+            >
+              Select Range <CalendarMonthIcon sx={{ fontSize }} />
+            </button>
+            {showDatePicker && (
+              <div className={classes.datePicker}>
+                <DateRange
+                  ranges={dateRange}
+                  onChange={(ranges) => setDateRange([ranges.selection])}
+                  minDate={new Date(2024, 0, 1)}
+                  maxDate={new Date()}
+                  color="#164f63"
+                />
+                <button
+                  className={classes.applyButton}
+                  onClick={() => {
+                    setShowDatePicker(false);
+                    fetchLeadsData();
+                  }}
+                >
+                  Apply
+                </button>
+              </div>
+            )}
+          </div>
+          <div className={classes.filters}>
+            <select
+              className={classes.select}
+              value={statusFilter}
+              onChange={(e) => {
+                setPage(1);
+                setStatusFilter(e.target.value);
               }}
             >
-              <DateRange
-                ranges={dateRange}
-                onChange={handleSelect}
-                moveRangeOnFirstSelection={false}
-                minDate={new Date(2024, 0, 1)}
-                maxDate={new Date()}
-                color="#164f63"
-              />
-              <button className={classes.applyButton} onClick={handleApply}>
-                Apply
-              </button>
-            </div>
-          )}
+              <option value="">Status</option>
+              <option value="new">New</option>
+              <option value="interested">Interested</option>
+              <option value="not_interested">Not Interested</option>
+              <option value="unreachable">Unreachable</option>
+              <option value="converted">Converted</option>
+            </select>
+          </div>
+          <div className={classes.filters}>
+            <select
+              className={classes.select}
+              value={assignedToFilter}
+              onChange={(e) => {
+                setPage(1);
+                setAssignedToFilter(e.target.value);
+              }}
+            >
+              <option value="">All Employees</option>
+              {employees.map((emp) => (
+                <option key={emp._id} value={emp._id}>
+                  {emp.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
-      {loading ? (
-        <div style={{ margin: "24px 0" }}>
-          <CustomSkeleton height={25} width="120px" />
-        </div>
-      ) : (
-        <p className={classes.leadCountText}>Leads Count : {leadData.length}</p>
-      )}
 
       {loading ? (
-        <CustomSkeleton height={450} />
+        <CustomSkeleton height={300} />
       ) : (
-        <div className={classes.leadCardContainer}>
-          {leadData.map((lead, index) => (
-            <LeadCard
-              key={index}
-              id={lead?._id}
-              name={lead?.name}
-              email={lead?.email}
-              phone={lead?.phoneNumber}
-              requirement={lead?.requirement}
-              preferredLocation={lead?.location}
-              status={lead?.status}
-              createdAt={lead?.createdAt}
-              origin={lead?.origin}
-              handleDelete={handleDelete}
-              fetchLeadsData={fetchLeadsData}
-            />
-          ))}
-        </div>
-      )}
+        <>
+          <p className={classes.leadCountText}>Leads Count: {totalLeads}</p>
 
-      {!loading && leadData.length === 0 && (
-        <p
-          style={{
-            textAlign: "center",
-            margin: "24px 0",
-            fontWeight: "600",
-            fontSize: "18px",
-          }}
-        >
-          No Leads Found within date range !
-        </p>
+          <PaginatedTable data={leadData} handleDelete={handleDelete} />
+
+          <div className={classes.paginationWrapper}>
+            <div className={classes.paginationControls}>
+              <span>Rows per page:</span>
+              <select
+                value={limit}
+                onChange={(e) => {
+                  setPage(1);
+                  setLimit(Number(e.target.value));
+                }}
+                className={classes.select}
+              >
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </select>
+            </div>
+
+            <div className={classes.pagination}>
+              <button
+                disabled={page === 1}
+                onClick={() => setPage(page - 1)}
+                className={classes.pageBtn}
+              >
+                Prev
+              </button>
+
+              <span>
+                Page {page} of {Math.ceil(totalLeads / limit)}
+              </span>
+
+              <button
+                disabled={page * limit >= totalLeads}
+                onClick={() => setPage(page + 1)}
+                className={classes.pageBtn}
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

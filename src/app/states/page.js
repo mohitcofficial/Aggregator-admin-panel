@@ -4,9 +4,9 @@ import HeadingContainer from "@/components/HeadingContainer";
 import "../../app/globals.css";
 import AddIcon from "@mui/icons-material/Add";
 import StateApiServices from "@/services/api/State.api.services";
-import { headers } from "next/headers";
 import Link from "next/link";
 import CustomLayout from "@/components/CustomLayout";
+import { headers } from "next/headers";
 
 export const metadata = {
   title: "States",

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import classes from "./LeadForm.module.css";
 import Loader from "@/utils/Loader";
 import { useRouter } from "next/navigation";
+import AdminApiServices from "@/services/api/Admin.api.services";
 
 const origins = ["Mail", "Phone", "Whatsapp", "Others"];
 
@@ -15,10 +16,29 @@ function LeadForm() {
   const [location, setLocation] = useState("");
   const [requirement, setRequirement] = useState("");
   const [selectedOrigin, setSelectedOrigin] = useState("Mail");
+  const [assignedToFilter, setAssignedToFilter] = useState("");
   const [flag, setFlag] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [employees, setEmployees] = useState([]);
 
   const router = useRouter();
+
+  const fetchSalesEmployee = async () => {
+    setLoading(true);
+    try {
+      const data = await AdminApiServices.getSalesEmployees();
+      setEmployees(data?.users || []);
+      setAssignedToFilter(data?.users?.[0]._id);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSalesEmployee();
+  }, []);
 
   useEffect(() => {
     if (
@@ -43,6 +63,7 @@ function LeadForm() {
       location,
       requirement,
       origin: selectedOrigin,
+      assignedTo: assignedToFilter,
     };
     setLoading(true);
     try {
@@ -69,7 +90,7 @@ function LeadForm() {
       return;
     }
     const confirmCancel = window.confirm(
-      "Are you sure you want to cancel? All unsaved changes will be lost."
+      "Are you sure you want to cancel? All unsaved changes will be lost.",
     );
 
     if (confirmCancel) router.push("/leads");
@@ -133,6 +154,19 @@ function LeadForm() {
         {origins.map((origin, index) => (
           <option className={classes.menuOption} key={index} value={origin}>
             {origin}
+          </option>
+        ))}
+      </select>
+      <select
+        className={classes.selectMenu}
+        value={assignedToFilter}
+        onChange={(e) => {
+          setAssignedToFilter(e.target.value);
+        }}
+      >
+        {employees.map((emp) => (
+          <option key={emp._id} value={emp._id}>
+            {emp.name}
           </option>
         ))}
       </select>

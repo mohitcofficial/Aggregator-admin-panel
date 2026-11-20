@@ -2,6 +2,7 @@ import HeadingContainer from "@/components/HeadingContainer";
 import classes from "./page.module.css";
 import CardsContainer from "@/components/dashboard/CardsContainer";
 import CustomLayout from "@/components/CustomLayout";
+import SalesDashboard from "@/components/dashboard/SalesDashboard";
 
 export const metadata = {
   title: "Dashboard | Virtualxcel",
@@ -18,6 +19,7 @@ export default function Home() {
           <HeadingContainer heading={"Dashboard"} />
           <div className={classes.contentContainer}>
             <CardsContainer />
+            <SalesDashboard />
           </div>
         </div>
       </div>

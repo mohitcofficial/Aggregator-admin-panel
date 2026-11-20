@@ -8,25 +8,28 @@
 .buttonContainer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
+/* ADD BUTTON */
 .addLeadButton {
   display: flex;
   align-items: center;
   border: none;
   outline: none;
   color: white;
-  gap: 2px;
+  gap: 4px;
   font-size: 13px;
   font-family: inherit;
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
-  width: 100px;
-  padding: 6px;
+  padding: 6px 10px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 .addLeadButton:hover {
@@ -34,7 +37,75 @@
   color: var(--primary-color);
 }
 
+.leadCountText {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ================= FILTERS ================= */
+
+.filtersContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* DATE TEXT */
+.dateRangeText {
+  display: flex;
+  font-size: 13px;
+  gap: 6px;
+  color: rgb(81, 81, 81);
+}
+
+.dateRangeText > span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+/* RANGE BUTTON */
 .selectRangeButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: 10px;
+  font-weight: 500;
+  outline: none;
+  border: 1.5px solid var(--primary-color);
+  background-color: transparent;
+  color: var(--primary-color);
+  transition: all 200ms ease-in-out;
+}
+
+.selectRangeButton:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+.datePicker {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+  top: 100%;
+}
+.applyButton {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 0;
+  border: none;
+  width: 100%;
+}
+
+.filters select {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -51,42 +122,83 @@
   transition: all 200ms ease-in-out;
 }
 
-.selectRangeButton:hover {
-  background-color: var(--primary-color);
-  color: var(--white-color);
-}
-
-.applyButton {
-  background-color: var(--primary-color);
-  color: var(--white-color);
-  font-size: 14px;
-  cursor: pointer;
-  padding: 8px 0;
-  border: none;
-  outline: none;
-}
-
-.dateRangeText {
-  display: flex;
-  font-size: 13px;
-  gap: 6px;
-  color: rgb(81, 81, 81);
-}
-
-.dateRangeText > span {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-color);
-}
+/* ================= COUNT ================= */
 
 .leadCountText {
-  margin: 24px 0 12px 0;
+  margin: 20px 0 12px 0;
   font-size: 15px;
   color: var(--text-color);
+  font-weight: 500;
 }
 
-.leadCardContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 450px));
-  gap: 16px;
+/* ================= TABLE CONTAINER ================= */
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 10px;
+}
+
+/* ================= PAGINATION ================= */
+
+.paginationWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+/* BUTTONS */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pageBtn {
+  padding: 6px 12px;
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pageBtn:hover {
+  opacity: 0.85;
+}
+
+.pageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .buttonContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filtersContainer {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .paginationWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

@@ -4,18 +4,12 @@ import { LOCATION_URLs } from "../http.services";
 export default {
   getAllLocations: async function (token) {
     const { data } = await axios.get(`${LOCATION_URLs.allLocations}`, {
-      headers: {
-        Cookie: `authToken=${token}`,
-      },
       withCredentials: true,
     });
     return data;
   },
   getLocationInfo: async function (id, token) {
     const { data } = await axios.get(`${LOCATION_URLs.locationInfo}/${id}`, {
-      headers: {
-        Cookie: `authToken=${token}`,
-      },
       withCredentials: true,
     });
     return data;
@@ -25,7 +19,7 @@ export default {
       `${LOCATION_URLs.deleteLocation}/${id}`,
       {
         withCredentials: true,
-      }
+      },
     );
     return data;
   },
@@ -38,7 +32,7 @@ export default {
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
-      }
+      },
     );
     return data;
   },
@@ -60,7 +54,7 @@ export default {
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
-      }
+      },
     );
     return data;
   },
@@ -73,14 +67,14 @@ export default {
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
-      }
+      },
     );
     return data;
   },
   deleteLocationImage: async function (id, params) {
     const { data } = await axios.delete(
       `${LOCATION_URLs.deleteLocationImage}/${id}`,
-      { params, withCredentials: true }
+      { params, withCredentials: true },
     );
     return data;
   },

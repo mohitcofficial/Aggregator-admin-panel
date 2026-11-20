@@ -29,6 +29,7 @@ export const ADMIN_URLs = {
   login: `${BASEURL}/api/v1/admin/login`,
   logout: `${BASEURL}/api/v1/logout`,
   getMyProfile: `${BASEURL}/api/v1/me`,
+  getSalesEmployees: `${BASEURL}/api/v1/users?role=sales`,
 };
 export const LEAD_URLs = {
   createLead: `${BASEURL}/api/v1/lead`,

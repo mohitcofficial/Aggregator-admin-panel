@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3004",
     "lint": "next lint"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
     "@mui/material": "^6.1.6",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
+    "chart.js": "^4.5.1",
     "framer-motion": "^11.11.11",
     "highcharts": "^11.4.6",
     "highcharts-react-official": "^3.2.1",
@@ -23,6 +24,7 @@
     "next": "14.2.5",
     "nextjs-toploader": "^3.7.15",
     "react": "^18",
+    "react-chartjs-2": "^5.3.1",
     "react-date-range": "^2.0.1",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",

@@ -1,0 +1,24 @@
+.container {
+  margin: 24px 0;
+  width: 100%;
+}
+.chartGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 100px;
+}
+
+.chartBox {
+  background: #ececec;
+  padding: 20px;
+  border-radius: 12px;
+  color: #000000;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chartBox h4 {
+  margin-bottom: 10px;
+}

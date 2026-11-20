@@ -1,0 +1,73 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.thead {
+  background: #164f63;
+  color: #fff;
+}
+
+.th {
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+  text-align: center;
+}
+
+.td {
+  padding: 10px;
+  font-size: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.tr:hover {
+  background: #f9f9f9;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+}
+
+.editButton {
+  background: #0089ac;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.viewButton {
+  background: #969696;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.deleteBtn {
+  background: #ff4d4f;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.viewButton:hover {
+  background: #616161;
+}
+.editButton:hover {
+  background: #00627a;
+}
+.deleteBtn:hover {
+  background: #af0003;
+}
