@@ -3,7 +3,7 @@
 import CustomLayout from "@/components/CustomLayout";
 import React, { useEffect, useState } from "react";
 
-export default function page({ params }) {
+export default function Page({ params }) {
   const { id } = params;
 
   const [lead, setLead] = useState(null);
