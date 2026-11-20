@@ -33,17 +33,23 @@ function PaginatedTable({ data, handleDelete }) {
             <td className={classes.td}>{lead?.location}</td>
             <td className={classes.td}>{lead?.followUps?.length}</td>
             <td className={classes.td}>{lead?.assignedTo?.name || "-"}</td>
-            <td className={classes.td}>{getDate(lead?.createdAt)}</td>
+            <td className={classes.td}>
+              {new Date(lead?.createdAt).toLocaleString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
+            </td>
             <td className={`${classes.td} ${classes.flex}`}>
               <Link href={`/lead/${lead?._id}`} className="linkTag">
                 <button className={classes.viewButton}>
                   <VisibilityIcon sx={{ fontSize: 20 }} />
                 </button>
               </Link>
-              <button
-                className={classes.editButton}
-                onClick={() => handleDelete(lead?._id)}
-              >
+              <button className={classes.editButton} onClick={() => {}}>
                 <EditIcon sx={{ fontSize: 20 }} />
               </button>
               <button
