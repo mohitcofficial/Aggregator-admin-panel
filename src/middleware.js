@@ -4,13 +4,19 @@ export function middleware(request) {
   const token = request.cookies.get("authToken")?.value;
   const pathname = request.nextUrl.pathname;
 
-  // Public routes
-  const publicRoutes = ["/login"];
+  // Homepage redirect
+  if (pathname === "/") {
+    return NextResponse.redirect(
+      new URL(token ? "/states" : "/login", request.url),
+    );
+  }
 
-  if (publicRoutes.includes(pathname)) {
+  // Login is public
+  if (pathname === "/login") {
     return NextResponse.next();
   }
 
+  // Protect all remaining pages
   if (!token) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
@@ -19,5 +25,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/states/:path*", "/cities/:path*", "/locations/:path*"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
 };
