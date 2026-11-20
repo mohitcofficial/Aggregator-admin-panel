@@ -2,25 +2,24 @@ import { NextResponse } from "next/server";
 
 export function middleware(request) {
   const token = request.cookies.get("authToken")?.value;
-  const pathname = request.nextUrl.pathname;
+  const { pathname } = request.nextUrl;
 
-  // Homepage redirect
-  if (pathname === "/") {
-    return NextResponse.redirect(
-      new URL(token ? "/states" : "/login", request.url),
-    );
-  }
-
-  // Login is public
-  if (pathname === "/login") {
+  // Allow login page when not authenticated
+  if (pathname === "/login" && !token) {
     return NextResponse.next();
   }
 
-  // Protect all remaining pages
+  // Redirect authenticated users away from login
+  if (pathname === "/login" && token) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // Redirect unauthenticated users to login
   if (!token) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
+  // Allow all pages when authenticated
   return NextResponse.next();
 }
 
