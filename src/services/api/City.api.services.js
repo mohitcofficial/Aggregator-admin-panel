@@ -10,6 +10,9 @@ export default {
   },
   getCityInfo: async function (id, token) {
     const { data } = await axios.get(`${CITY_URLs.cityInfo}/${id}`, {
+      headers: {
+        Cookie: `authToken=${token}`,
+      },
       withCredentials: true,
     });
     return data;
