@@ -23,8 +23,11 @@ export default async function CityPage({ params }) {
   }
 
   try {
+    console.log("calling");
     const data = await CityApiServices.getCityInfo(id, token);
+    console.log("data: ", data);
     const data2 = await StateApiServices.getAllStates(token);
+    console.log("data2: ", data2);
     const cityInfo = data?.city;
     const stateData = data2?.states?.map((state) => ({
       id: state?._id,
