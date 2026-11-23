@@ -23,12 +23,8 @@ export default async function CityPage({ params }) {
   }
 
   try {
-    console.log("calling");
-    console.log("Token :", token);
     const data = await CityApiServices.getCityInfo(id, token);
-    console.log("data: ", data);
     const data2 = await StateApiServices.getAllStates(token);
-    console.log("data2: ", data2);
     const cityInfo = data?.city;
     const stateData = data2?.states?.map((state) => ({
       id: state?._id,
@@ -128,12 +124,7 @@ export default async function CityPage({ params }) {
     );
   } catch (error) {
     console.error("Error fetching city info: ", error.message);
-    console.error("CITY API FAILED");
-    console.error("Status:", error.response?.status);
-    console.error("URL:", error.config?.url);
-    console.error("Method:", error.config?.method);
     console.error("Response:", error.response?.data);
-    console.error("Message:", error.message);
 
     return (
       <CustomLayout>

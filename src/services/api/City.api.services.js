@@ -4,6 +4,9 @@ import { CITY_URLs } from "../http.services";
 export default {
   getAllCities: async function (token) {
     const { data } = await axios.get(`${CITY_URLs.allCities}`, {
+      headers: {
+        Cookie: `authToken=${token}`,
+      },
       withCredentials: true,
     });
     return data;
