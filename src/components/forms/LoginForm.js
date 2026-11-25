@@ -5,11 +5,13 @@ import classes from "./LoginForm.module.css";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Loader from "@/utils/Loader";
+import { useAuth } from "../../context/AuthContext";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { setUser } = useAuth();
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -27,8 +29,9 @@ function LoginForm() {
     setLoading(true);
     try {
       const data = await ADMIN_APIs.login(body);
+      setUser(data.user);
       toast.success(data?.message);
-      router.replace("/");
+      router.replace("/dashboard");
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.message || "Something Went Wrong !");

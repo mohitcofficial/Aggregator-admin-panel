@@ -32,4 +32,16 @@ export default {
     });
     return data;
   },
+  getAllUsers: async function () {
+    const { data } = await axios.get(`${ADMIN_URLs.getAllUser}`, {
+      withCredentials: true,
+    });
+    return data;
+  },
+  loadUser: async function () {
+    const { data } = await axios.get(`${ADMIN_URLs.loadUser}`, {
+      withCredentials: true,
+    });
+    return data;
+  },
 };

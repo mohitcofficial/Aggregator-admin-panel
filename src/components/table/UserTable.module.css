@@ -1,0 +1,142 @@
+.tableContainer {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  position: relative;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(150, 150, 150, 0.274);
+  position: absolute;
+  z-index: 1;
+}
+
+.loader {
+  width: 60px;
+}
+
+.tableWrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: #d6d8df;
+  border-radius: 20px;
+}
+
+.tableWrapper table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+}
+
+.tableWrapper thead {
+  position: sticky;
+  top: 0;
+  background: #fbfafd;
+  z-index: 5;
+}
+
+.tableWrapper th {
+  text-align: left;
+  padding: 20px;
+  font-size: 14px;
+  color: black;
+  border-bottom: 1px solid var(--border);
+}
+
+.tableWrapper td {
+  padding: 12px;
+  font-size: 11px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.tableWrapper tbody tr {
+  transition: 0.2s ease;
+}
+
+.employeeID {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.type {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.active {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.inactive {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+}
+.highlight {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #e7e7e7;
+  width: fit-content;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.editButton {
+  color: rgb(65, 65, 65);
+  cursor: pointer;
+  padding: 4px;
+}
+.deleteButton {
+  color: red;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.editButton:hover {
+  color: rgb(0, 86, 121);
+}
+
+.deleteButton:hover {
+  color: rgb(184, 0, 0);
+}

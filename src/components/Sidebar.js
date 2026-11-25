@@ -1,58 +1,109 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+
 import styles from "./Sidebar.module.css";
+
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import HelpIcon from "@mui/icons-material/Help";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { usePathname } from "next/navigation";
-import Image from "next/image";
 import FlagIcon from "@mui/icons-material/Flag";
+import PeopleIcon from "@mui/icons-material/People";
+import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
+
 import FaviconImage from "../../public/images/FaviconImage.png";
 
-const Sidebar = () => {
-  const path = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeNavItem, setActiveNavItem] = useState("");
+const NAV_ITEMS = [
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: DashboardIcon,
+  },
+  {
+    label: "States",
+    href: "/states",
+    icon: FlagIcon,
+  },
+  {
+    label: "Cities",
+    href: "/cities",
+    icon: LocationCityIcon,
+  },
+  {
+    label: "Locations",
+    href: "/locations",
+    icon: LocationOnIcon,
+  },
+  {
+    label: "Users",
+    href: "/users",
+    icon: PeopleIcon,
+  },
+  {
+    label: "Leads",
+    href: "/leads",
+    icon: HelpIcon,
+  },
+  {
+    label: "Quotations",
+    href: "/quotations",
+    icon: RequestQuoteIcon,
+  },
+];
 
-  useEffect(() => {
-    const parts = path.split("/").filter((part) => part !== "");
-    const lastElement = parts[parts.length - 1];
-    if (!lastElement) {
-      setActiveNavItem("dashboard");
-    } else if (lastElement === "states") {
-      setActiveNavItem("states");
-    } else if (lastElement === "cities") {
-      setActiveNavItem("cities");
-    } else if (lastElement === "locations") {
-      setActiveNavItem("locations");
-    } else if (lastElement === "leads") {
-      setActiveNavItem("leads");
-    } else {
-      setActiveNavItem("");
+const ICON_SIZE = {
+  xs: 24,
+  sm: 26,
+  md: 26,
+  lg: 28,
+};
+
+const TOGGLE_ICON_SIZE = {
+  xs: 28,
+  sm: 30,
+  md: 32,
+  lg: 34,
+};
+
+const Sidebar = () => {
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Check active navigation item
+  const isActive = (href) => {
+    if (href === "/") {
+      return pathname === "/";
     }
-  }, [path]);
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const handleClose = () => setIsOpen(false);
 
   const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  const fontSize = { xs: 24, sm: 26, md: 26, lg: 28 };
-  const fontSize2 = { xs: 28, sm: 30, md: 32, lg: 34 };
 
   return (
     <>
-      {isOpen && <div onClick={handleClose} className={styles.fade}></div>}
-      <nav className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+      {/* Overlay */}
+      {isOpen && (
+        <div onClick={handleClose} className={styles.fade} aria-hidden="true" />
+      )}
+
+      <nav
+        className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}
+        aria-label="Main navigation"
+      >
         <div className={styles.marginContainer}>
           <div className={styles.box1}>
+            {/* Header */}
             <div className={styles.topHeader}>
               {isOpen ? (
                 <>
@@ -60,110 +111,67 @@ const Sidebar = () => {
                     <p className={styles.first}>Virtual</p>
                     <p className={styles.second}>xcel</p>
                   </div>
+
                   <CloseIcon
                     className={styles.toggleButton}
                     onClick={toggleSidebar}
                     sx={{
                       color: "#fff",
-                      fontSize: fontSize2,
+                      fontSize: TOGGLE_ICON_SIZE,
+                      cursor: "pointer",
                     }}
                   />
                 </>
               ) : (
                 <MenuIcon
                   onClick={toggleSidebar}
-                  sx={{ color: "#fff", fontSize: fontSize2 }}
+                  sx={{
+                    color: "#fff",
+                    fontSize: TOGGLE_ICON_SIZE,
+                    cursor: "pointer",
+                  }}
                 />
               )}
             </div>
-            <ul className={styles.navLinks}>
-              <li className={styles.link}>
-                <Link
-                  onClick={handleClose}
-                  className={`${styles.linkTag} ${
-                    activeNavItem === "dashboard" && styles.active
-                  }`}
-                  href="/"
-                  style={!isOpen ? { flexDirection: "column" } : {}}
-                >
-                  <DashboardIcon sx={{ fontSize: fontSize }} />
-                  <span className={isOpen ? styles.text : styles.text2}>
-                    Dashboard
-                  </span>
-                </Link>
-              </li>
-              <li className={styles.link}>
-                <Link
-                  onClick={handleClose}
-                  className={`${styles.linkTag} ${
-                    activeNavItem === "states" && styles.active
-                  }`}
-                  style={!isOpen ? { flexDirection: "column" } : {}}
-                  href="/states"
-                >
-                  <FlagIcon sx={{ fontSize: fontSize }} />
-                  <span className={isOpen ? styles.text : styles.text2}>
-                    States
-                  </span>
-                </Link>
-              </li>
-              <li className={styles.link}>
-                <Link
-                  onClick={handleClose}
-                  className={`${styles.linkTag} ${
-                    activeNavItem === "cities" && styles.active
-                  }`}
-                  style={!isOpen ? { flexDirection: "column" } : {}}
-                  href="/cities"
-                >
-                  <LocationCityIcon sx={{ fontSize: fontSize }} />
-                  <span className={isOpen ? styles.text : styles.text2}>
-                    Cities
-                  </span>
-                </Link>
-              </li>
-              <li className={styles.link}>
-                <Link
-                  onClick={handleClose}
-                  className={`${styles.linkTag} ${
-                    activeNavItem === "locations" && styles.active
-                  }`}
-                  style={!isOpen ? { flexDirection: "column" } : {}}
-                  href="/locations"
-                >
-                  <LocationOnIcon sx={{ fontSize: fontSize }} />
-                  <span className={isOpen ? styles.text : styles.text2}>
-                    Locations
-                  </span>
-                </Link>
-              </li>
-              <li className={styles.link}>
-                <Link
-                  onClick={handleClose}
-                  className={`${styles.linkTag} ${
-                    activeNavItem === "leads" && styles.active
-                  }`}
-                  style={!isOpen ? { flexDirection: "column" } : {}}
-                  href="/leads"
-                >
-                  <HelpIcon sx={{ fontSize: fontSize }} />
 
-                  <span className={isOpen ? styles.text : styles.text2}>
-                    Leads
-                  </span>
-                </Link>
-              </li>
+            {/* Navigation */}
+            <ul className={styles.navLinks}>
+              {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+                const active = isActive(href);
+
+                return (
+                  <li className={styles.link} key={href}>
+                    <Link
+                      href={href}
+                      onClick={handleClose}
+                      aria-current={active ? "page" : undefined}
+                      className={`${styles.linkTag} ${
+                        active ? styles.active : ""
+                      }`}
+                      style={!isOpen ? { flexDirection: "column" } : undefined}
+                    >
+                      <Icon sx={{ fontSize: ICON_SIZE }} />
+
+                      <span className={isOpen ? styles.text : styles.text2}>
+                        {label}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
+
+          {/* Footer Image */}
           <div className={styles.imageContainer}>
             <Image
               className={styles.image}
               src={FaviconImage}
-              alt="Image"
-              fill={true}
+              alt="Virtualxcel"
+              fill
               placeholder="blur"
-              priority={true}
-              quality={true}
+              priority
+              sizes="60px"
             />
           </div>
         </div>

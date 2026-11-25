@@ -3,6 +3,7 @@ import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { getMyProfile } from "./lib/auth";
+import { AuthProvider } from "../context/AuthContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -35,7 +36,7 @@ export default async function RootLayout({ children }) {
       >
         <Toaster position="bottom-center" reverseOrder={false} />
         <NextTopLoader showSpinner={false} />
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

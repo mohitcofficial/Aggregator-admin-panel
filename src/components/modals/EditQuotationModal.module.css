@@ -1,0 +1,196 @@
+.editButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid #172b4d;
+  background: #fff;
+  color: #172b4d;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.editButton:hover {
+  background: #f2f5fa;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.editModal {
+  background: #fff;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.modalHeader {
+  padding: 20px 25px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 21px;
+  color: #172b4d;
+}
+
+.modalHeader p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.closeModal {
+  border: none;
+  background: #f1f5f9;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modalBody {
+  padding: 25px;
+  overflow-y: auto;
+}
+
+.modalBody h3 {
+  color: #172b4d;
+  font-size: 16px;
+  margin: 0 0 18px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.formGroup,
+.formGroupFull {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.formGroupFull {
+  grid-column: 1 / -1;
+}
+
+.formGroup label,
+.formGroupFull label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroupFull input,
+.formGroupFull textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #dbe1ea;
+  border-radius: 7px;
+  font-size: 14px;
+  outline: none;
+  color: #172b4d;
+  background: #fff;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroupFull textarea:focus {
+  border-color: #172b4d;
+}
+
+.modalSection {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.itemEditCard {
+  padding: 18px;
+  margin-bottom: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.itemEditCard h4 {
+  margin: 0 0 16px;
+  color: #172b4d;
+  font-size: 14px;
+}
+
+.modalFooter {
+  padding: 16px 25px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancelButton,
+.saveButton {
+  padding: 11px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancelButton {
+  border: 1px solid #dbe1ea;
+  background: #fff;
+  color: #475569;
+}
+
+.saveButton {
+  border: none;
+  background: #172b4d;
+  color: #fff;
+}
+
+.saveButton:disabled,
+.cancelButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .modalOverlay {
+    padding: 10px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formGroupFull {
+    grid-column: auto;
+  }
+
+  .modalBody {
+    padding: 18px;
+  }
+}

@@ -30,10 +30,24 @@ export const ADMIN_URLs = {
   logout: `${BASEURL}/api/v1/logout`,
   getMyProfile: `${BASEURL}/api/v1/me`,
   getSalesEmployees: `${BASEURL}/api/v1/users?role=sales`,
+  getAllUser: `${BASEURL}/api/v1/users`,
+  loadUser: `${BASEURL}/api/v1/me`,
 };
 export const LEAD_URLs = {
   createLead: `${BASEURL}/api/v1/lead`,
+  getLeadByID: `${BASEURL}/api/v1/lead`,
   getLeads: `${BASEURL}/api/v1/leads`,
   updateLead: `${BASEURL}/api/v1/lead`,
   deleteLead: `${BASEURL}/api/v1/lead`,
+  createFollowUp: `${BASEURL}/api/v1/lead`,
+  updateFollowUp: `${BASEURL}/api/v1/lead`,
+  deleteFollowUp: `${BASEURL}/api/v1/lead`,
+};
+export const QUOTATION_URLs = {
+  createQuotation: `${BASEURL}/api/v1/quotation`,
+  getQuotationByID: `${BASEURL}/api/v1/quotation`,
+  getAllQuotations: `${BASEURL}/api/v1/quotations`,
+  updateQuotation: `${BASEURL}/api/v1/quotation`,
+  deleteQuotation: `${BASEURL}/api/v1/quotation`,
+  downloadQuotation: `${BASEURL}/api/v1/quotation`,
 };

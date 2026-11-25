@@ -7,7 +7,7 @@
 }
 
 .thead {
-  background: #164f63;
+  background: var(--primary-color);
   color: #fff;
 }
 
