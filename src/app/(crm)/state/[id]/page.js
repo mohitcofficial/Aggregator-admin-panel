@@ -3,8 +3,8 @@ import { getDate, getTime } from "@/utils/convertDate";
 import EditIcon from "@mui/icons-material/Edit";
 import { headers } from "next/headers";
 import Image from "next/image";
-import STATEAPIs from "../../../services/api/State.api.services";
 import classes from "./page.module.css";
+import StateApiServices from "@/services/api/State.api.services";
 
 export default async function StatePage({ params }) {
   const { id } = params;
@@ -20,7 +20,7 @@ export default async function StatePage({ params }) {
   }
 
   try {
-    const response = await STATEAPIs.getStateInfo(id, token);
+    const response = await StateApiServices.getStateInfo(id, token);
     const stateInfo = response?.state;
 
     return (
